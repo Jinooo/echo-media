@@ -1,0 +1,151 @@
+// ============================================
+// Echo Media - Global Styles
+// ============================================
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// --- Reset & Base ---
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-base;
+  color: $color-text;
+  background-color: $color-background;
+  overflow-x: hidden;
+}
+
+// --- Typography ---
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+// --- Focus Styles ---
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// --- Selection ---
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}
+
+// --- Scrollbar ---
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-background;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-border;
+  border-radius: $border-radius-full;
+
+  &:hover {
+    background: $color-text-muted;
+  }
+}
+
+// --- Utility: Screen Reader Only ---
+.sr-only {
+  @include visually-hidden;
+}
+
+// --- Utility: Container ---
+.container {
+  @include container;
+}
+
+// --- Utility: Section ---
+.section {
+  @include section;
+}
+
+// --- Utility: Scroll Reveal ---
+.scroll-reveal {
+  @include scroll-reveal;
+}
+
+// --- Page Transition ---
+.page-transition {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

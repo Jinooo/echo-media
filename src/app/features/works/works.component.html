@@ -1,0 +1,114 @@
+<main class="works-page">
+  <section class="works-page__hero">
+    <div class="works-page__hero-content">
+      <h1 class="works-page__title">Our Works</h1>
+      <p class="works-page__subtitle">
+        A curated selection of our finest projects across film, commercial, music video,
+        documentary, and virtual production.
+      </p>
+    </div>
+  </section>
+
+  <div class="works-page__container">
+    <div class="works-page__toolbar">
+      <div class="works-page__filters" role="tablist" aria-label="Filter works by category">
+        @for (cat of categories; track cat.key) {
+          <button
+            class="works-page__filter-btn"
+            [class.works-page__filter-btn--active]="activeFilter() === cat.key"
+            (click)="setFilter(cat.key)"
+            role="tab"
+            [attr.aria-selected]="activeFilter() === cat.key"
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <div class="works-page__search">
+        <label for="works-search" class="sr-only">Search works</label>
+        <input
+          id="works-search"
+          type="text"
+          class="works-page__search-input"
+          [(ngModel)]="searchQuery"
+          placeholder="Search projects..."
+          (ngModelChange)="currentPage.set(1)"
+        />
+        <span class="works-page__search-icon" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+
+    @if (filteredWorks().length === 0) {
+      <div class="works-page__empty">
+        <p>No projects found matching your criteria.</p>
+      </div>
+    } @else {
+      <div class="works-page__grid">
+        @for (work of paginatedWorks(); track work.slug) {
+          <a [routerLink]="['/works', work.slug]" class="works-page__card">
+            <div class="works-page__card-image">
+              <div class="works-page__card-placeholder">
+                <span class="works-page__card-icon">
+                  @switch (work.category) {
+                    @case ('film') { 🎬 }
+                    @case ('commercial') { 📺 }
+                    @case ('music-video') { 🎵 }
+                    @case ('documentary') { 🎥 }
+                    @case ('virtual-production') { 🌐 }
+                  }
+                </span>
+              </div>
+              <div class="works-page__card-overlay">
+                <span class="works-page__card-view">View Project →</span>
+              </div>
+            </div>
+            <div class="works-page__card-info">
+              <h2 class="works-page__card-title">{{ work.title }}</h2>
+              <p class="works-page__card-meta">
+                <span>{{ work.client }}</span>
+                <span aria-hidden="true">·</span>
+                <span>{{ WORK_CATEGORIES[work.category] }}</span>
+                <span aria-hidden="true">·</span>
+                <span>{{ work.year }}</span>
+              </p>
+            </div>
+          </a>
+        }
+      </div>
+
+      @if (totalPages() > 1) {
+        <nav class="works-page__pagination" aria-label="Pagination">
+          <button
+            class="works-page__page-btn"
+            [disabled]="currentPage() === 1"
+            (click)="setPage(currentPage() - 1)"
+            aria-label="Previous page"
+          >
+            ← Prev
+          </button>
+
+          @for (page of pages(); track page) {
+            <button
+              class="works-page__page-btn"
+              [class.works-page__page-btn--active]="currentPage() === page"
+              (click)="setPage(page)"
+              [attr.aria-current]="currentPage() === page ? 'page' : undefined"
+            >
+              {{ page }}
+            </button>
+          }
+
+          <button
+            class="works-page__page-btn"
+            [disabled]="currentPage() === totalPages()"
+            (click)="setPage(currentPage() + 1)"
+            aria-label="Next page"
+          >
+            Next →
+          </button>
+        </nav>
+      }
+    }
+  </div>
+</main>

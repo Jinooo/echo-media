@@ -1,0 +1,16 @@
+<section class="clients" aria-labelledby="clients-heading">
+  <div class="clients__container">
+    <div class="clients__header">
+      <p class="clients__label">Trusted By</p>
+      <h2 class="clients__heading" id="clients-heading">Clients</h2>
+    </div>
+
+    <div class="clients__logo-wall">
+      @for (client of clients; track client.id) {
+        <div class="clients__logo-item">
+          <span class="clients__logo-placeholder">{{ client.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,109 @@
+@if (notFound()) {
+  <main class="work-detail__not-found">
+    <h1>Project Not Found</h1>
+    <a routerLink="/works">← Back to Works</a>
+  </main>
+} @else if (work(); as work) {
+  <main class="work-detail">
+    <!-- Hero -->
+    <section class="work-detail__hero">
+      <div class="work-detail__hero-placeholder">
+        <span class="work-detail__hero-icon" aria-hidden="true">
+          @switch (work.category) {
+            @case ('film') { 🎬 }
+            @case ('commercial') { 📺 }
+            @case ('music-video') { 🎵 }
+            @case ('documentary') { 🎥 }
+            @case ('virtual-production') { 🌐 }
+          }
+        </span>
+      </div>
+    </section>
+
+    <!-- Project Info -->
+    <section class="work-detail__info">
+      <div class="work-detail__container">
+        <div class="work-detail__header">
+          <p class="work-detail__category">{{ WORK_CATEGORIES[work.category] }}</p>
+          <h1 class="work-detail__title">{{ work.title }}</h1>
+          <div class="work-detail__meta">
+            <span class="work-detail__meta-item"><strong>Client:</strong> {{ work.client }}</span>
+            <span class="work-detail__meta-item"><strong>Year:</strong> {{ work.year }}</span>
+            <span class="work-detail__meta-item"><strong>Role:</strong> {{ work.role }}</span>
+          </div>
+        </div>
+
+        <div class="work-detail__description">
+          <h2 class="work-detail__section-title">About This Project</h2>
+          <p class="work-detail__body">{{ work.description }}</p>
+        </div>
+
+        <div class="work-detail__tools">
+          <h2 class="work-detail__section-title">Tools & Tech</h2>
+          <div class="work-detail__tool-tags">
+            @for (tool of work.tools; track tool) {
+              <span class="work-detail__tool-tag">{{ tool }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="work-detail__gallery" aria-label="Project gallery">
+      <div class="work-detail__container">
+        <h2 class="work-detail__section-title">Gallery</h2>
+        <div class="work-detail__gallery-grid">
+          @for (img of work.gallery; track img; let i = $index) {
+            <div class="work-detail__gallery-item">
+              <div class="work-detail__gallery-placeholder">
+                <span class="work-detail__gallery-number">{{ i + 1 }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Video -->
+    @if (work.videoUrl) {
+      <section class="work-detail__video" aria-label="Project video">
+        <div class="work-detail__container">
+          <h2 class="work-detail__section-title">Watch</h2>
+          <div class="work-detail__video-placeholder">
+            <span>▶ Video Player</span>
+            <p class="work-detail__video-note">Video URL: {{ work.videoUrl }}</p>
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- Credits -->
+    <section class="work-detail__credits" aria-label="Project credits">
+      <div class="work-detail__container">
+        <h2 class="work-detail__section-title">Credits</h2>
+        <div class="work-detail__credits-grid">
+          @for (credit of work.credits; track credit.role) {
+            <div class="work-detail__credit">
+              <span class="work-detail__credit-role">{{ credit.role }}</span>
+              <span class="work-detail__credit-name">{{ credit.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Project -->
+    @if (nextWork()) {
+      <section class="work-detail__next">
+        <div class="work-detail__container">
+          <p class="work-detail__next-label">Next Project</p>
+          <a [routerLink]="['/works', nextWork()!.slug]" class="work-detail__next-link">
+            <span class="work-detail__next-title">{{ nextWork()!.title }}</span>
+            <span class="work-detail__next-arrow">→</span>
+          </a>
+        </div>
+      </section>
+    }
+  </main>
+}

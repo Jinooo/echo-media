@@ -1,0 +1,162 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-sticky;
+  transition: all $transition-base;
+  padding-block: 1.25rem;
+
+  &.is-scrolled {
+    background: rgba($color-background, 0.92);
+    backdrop-filter: blur(12px);
+    padding-block: 0.75rem;
+    box-shadow: 0 1px 0 rgba($color-text, 0.05);
+  }
+
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    text-decoration: none;
+    z-index: $z-dropdown + 1;
+  }
+
+  &__logo-text {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    letter-spacing: -0.02em;
+    color: $color-text;
+  }
+
+  &__logo-accent {
+    color: $color-primary;
+  }
+
+  &__nav {
+    @include tablet {
+      display: block;
+    }
+
+    &--open {
+      display: block;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: $spacing-xl;
+  }
+
+  &__nav-link {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-light;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-block: $spacing-xs;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: $color-primary;
+      transition: width $transition-base;
+    }
+
+    &:hover,
+    &--active {
+      color: $color-text;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__menu-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: $spacing-xs;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: $z-dropdown + 1;
+
+    @include tablet {
+      display: none;
+    }
+
+    &--open {
+      .header__menu-line:nth-child(1) {
+        transform: rotate(45deg) translate(3px, 3px);
+      }
+      .header__menu-line:nth-child(2) {
+        opacity: 0;
+      }
+      .header__menu-line:nth-child(3) {
+        transform: rotate(-45deg) translate(3px, -3px);
+      }
+    }
+  }
+
+  &__menu-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $color-text;
+    transition: all $transition-base;
+  }
+}
+
+// --- Mobile nav overlay ---
+@include tablet {
+  .header__nav {
+    display: block;
+  }
+
+  .header__nav-list {
+    display: flex;
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet - 1px}) {
+  .header__nav {
+    position: fixed;
+    inset: 0;
+    background: $color-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-base;
+
+    &--open {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-2xl;
+  }
+
+  .header__nav-link {
+    font-size: $font-size-2xl;
+  }
+}

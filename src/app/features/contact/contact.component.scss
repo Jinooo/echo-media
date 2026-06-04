@@ -1,0 +1,227 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.contact-page {
+  &__hero {
+    padding-block: 8rem 4rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba($color-primary, 0.06) 0%, transparent 60%),
+      $color-background;
+  }
+
+  &__hero-content {
+    @include container;
+  }
+
+  &__title {
+    @include heading-1;
+    margin-bottom: $spacing-md;
+  }
+
+  &__subtitle {
+    @include body-text-lg;
+    max-width: 540px;
+    margin-inline: auto;
+    color: $color-text-light;
+  }
+
+  &__container {
+    @include container;
+    padding-block: $section-padding;
+  }
+
+  &__layout {
+    display: grid;
+    gap: $spacing-3xl;
+
+    @include tablet {
+      grid-template-columns: 1fr 1.5fr;
+    }
+
+    @include laptop {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  // Info sidebar
+  &__info {
+    @include tablet {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+  }
+
+  &__info-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+  }
+
+  &__info-text {
+    color: $color-text-light;
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    background: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-md;
+    text-decoration: none;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: $color-primary;
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__link-icon {
+    font-size: 1.5rem;
+  }
+
+  &__link-label {
+    display: block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $color-text-muted;
+  }
+
+  &__link-text {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+  }
+
+  // Form
+  &__form {
+    background: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-lg;
+    padding: $spacing-2xl;
+
+    @include tablet {
+      padding: $spacing-3xl;
+    }
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
+  }
+
+  &__field {
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__required {
+    color: $color-primary;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: $font-size-base;
+    color: $color-text;
+    background: $color-background;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    transition: border-color $transition-base;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      background: $color-white;
+    }
+
+    &--error {
+      border-color: #e74c3c;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  &__error {
+    font-size: $font-size-xs;
+    color: #e74c3c;
+    margin-top: $spacing-xs;
+    display: block;
+  }
+
+  &__submit {
+    @include button-base;
+    margin-top: $spacing-xl;
+    width: 100%;
+    background: $color-primary;
+    color: $color-white;
+    font-size: $font-size-base;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-dark;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__success {
+    text-align: center;
+    padding: $spacing-3xl $spacing-xl;
+
+    .contact-page__success-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: $color-primary;
+      color: $color-white;
+      font-size: $font-size-2xl;
+      margin-bottom: $spacing-lg;
+    }
+
+    h2 {
+      font-size: $font-size-xl;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      color: $color-text-light;
+    }
+  }
+}

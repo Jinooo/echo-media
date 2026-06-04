@@ -1,0 +1,60 @@
+<section class="works" aria-labelledby="works-heading">
+  <div class="works__container">
+    <div class="works__header">
+      <p class="works__label">Selected Works</p>
+      <h2 class="works__heading" id="works-heading">Featured Projects</h2>
+    </div>
+
+    <div class="works__filters" role="tablist" aria-label="Filter works by category">
+      @for (cat of categories; track cat.key) {
+        <button
+          class="works__filter-btn"
+          [class.works__filter-btn--active]="activeFilter() === cat.key"
+          (click)="setFilter(cat.key)"
+          role="tab"
+          [attr.aria-selected]="activeFilter() === cat.key"
+        >
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <div class="works__grid">
+      @for (work of filteredWorks(); track work.slug) {
+        <a
+          [routerLink]="['/works', work.slug]"
+          class="works__card"
+        >
+          <div class="works__card-image">
+            <div class="works__card-placeholder" [attr.data-category]="work.category">
+              <span class="works__card-icon">
+                @switch (work.category) {
+                  @case ('film') { 🎬 }
+                  @case ('commercial') { 📺 }
+                  @case ('music-video') { 🎵 }
+                  @case ('documentary') { 🎥 }
+                  @case ('virtual-production') { 🌐 }
+                }
+              </span>
+            </div>
+            <div class="works__card-overlay">
+              <span class="works__card-view">View Project →</span>
+            </div>
+          </div>
+          <div class="works__card-info">
+            <h3 class="works__card-title">{{ work.title }}</h3>
+            <p class="works__card-meta">
+              <span>{{ WORK_CATEGORIES[work.category] }}</span>
+              <span aria-hidden="true">·</span>
+              <span>{{ work.year }}</span>
+            </p>
+          </div>
+        </a>
+      }
+    </div>
+
+    <div class="works__cta">
+      <a routerLink="/works" class="works__cta-btn">View All Works →</a>
+    </div>
+  </div>
+</section>

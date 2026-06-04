@@ -1,0 +1,124 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.about {
+  @include section;
+  background: $color-background-alt;
+
+  &__container {
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $color-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__heading {
+    @include heading-2;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  &__content {
+    display: grid;
+    gap: $spacing-2xl;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+
+  &__body {
+    @include body-text-lg;
+    color: $color-text-light;
+
+    strong {
+      color: $color-text;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__category-tag {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-full;
+  }
+
+  &__schools {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid $color-border;
+    flex-wrap: wrap;
+  }
+
+  &__schools-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__schools-list {
+    display: flex;
+    gap: $spacing-xl;
+  }
+
+  &__school {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xl;
+    margin-top: $spacing-3xl;
+    padding-top: $spacing-2xl;
+    border-top: 1px solid $color-border;
+
+    @include tablet {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__stat {
+    text-align: center;
+  }
+
+  &__stat-value {
+    display: block;
+    font-size: clamp(1.5rem, 3vw, $font-size-3xl);
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+
+  &__stat-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-top: $spacing-xs;
+  }
+}

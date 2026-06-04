@@ -1,0 +1,164 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.works {
+  @include section;
+
+  &__container {
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $color-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__heading {
+    @include heading-2;
+  }
+
+  &__filters {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__filter-btn {
+    padding: 0.5rem 1.5rem;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-full;
+    cursor: pointer;
+    transition: all $transition-base;
+    color: $color-text-light;
+
+    &:hover {
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+
+    &--active {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $color-white;
+
+      &:hover {
+        color: $color-white;
+      }
+    }
+  }
+
+  &__grid {
+    columns: 1;
+    column-gap: $grid-gap;
+
+    @include mobile-landscape {
+      columns: 2;
+    }
+
+    @include tablet-lg {
+      columns: 3;
+    }
+  }
+
+  &__card {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: $grid-gap;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      .works__card-overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__card-image {
+    position: relative;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    margin-bottom: $spacing-md;
+    background: $color-background-alt;
+  }
+
+  &__card-placeholder {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $color-accent, $color-background-alt);
+  }
+
+  &__card-icon {
+    font-size: 2.5rem;
+  }
+
+  &__card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($color-text, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &__card-view {
+    color: $color-white;
+    font-weight: $font-weight-medium;
+  }
+
+  &__card-info {
+    padding-inline: $spacing-xs;
+  }
+
+  &__card-title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__card-meta {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__cta {
+    text-align: center;
+    margin-top: $spacing-3xl;
+  }
+
+  &__cta-btn {
+    @include button-base;
+    border: 1.5px solid $color-border;
+    color: $color-text;
+    background: transparent;
+
+    &:hover {
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+  }
+}
+
+
+

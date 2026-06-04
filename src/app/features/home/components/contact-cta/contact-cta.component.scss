@@ -1,0 +1,172 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.contact {
+  @include section;
+  background: $color-text;
+  color: $color-white;
+
+  &__container {
+    @include container;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__heading {
+    @include heading-2;
+    color: $color-white;
+    margin-bottom: $spacing-md;
+  }
+
+  &__subtitle {
+    @include body-text-lg;
+    color: rgba($color-white, 0.6);
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  &__content {
+    display: grid;
+    gap: $spacing-3xl;
+
+    @include tablet {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  &__info-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-white;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: rgba($color-white, 0.7);
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__link-icon {
+    font-size: 1.125rem;
+  }
+
+  &__form {
+    background: rgba($color-white, 0.05);
+    border: 1px solid rgba($color-white, 0.1);
+    border-radius: $border-radius-lg;
+    padding: $spacing-2xl;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__field {
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: rgba($color-white, 0.8);
+    margin-bottom: $spacing-xs;
+
+    span {
+      color: $color-primary;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: $font-size-base;
+    color: $color-white;
+    background: rgba($color-white, 0.08);
+    border: 1px solid rgba($color-white, 0.15);
+    border-radius: $border-radius-md;
+    transition: border-color $transition-base;
+
+    &::placeholder {
+      color: rgba($color-white, 0.35);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &--error {
+      border-color: #e74c3c;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  &__error {
+    font-size: $font-size-xs;
+    color: #e74c3c;
+    margin-top: $spacing-xs;
+    display: block;
+  }
+
+  &__submit {
+    @include button-base;
+    margin-top: $spacing-xl;
+    width: 100%;
+    background: $color-primary;
+    color: $color-white;
+    font-size: $font-size-base;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-dark;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__success {
+    text-align: center;
+    padding: $spacing-3xl;
+    color: $color-primary-light;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Hide label asterisk from screen reader
+[aria-hidden='true'] {
+  speak: none;
+}

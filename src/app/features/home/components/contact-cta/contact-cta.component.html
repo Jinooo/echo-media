@@ -1,0 +1,114 @@
+<section class="contact" aria-labelledby="contact-heading">
+  <div class="contact__container">
+    <div class="contact__header">
+      <h2 class="contact__heading" id="contact-heading">Let's Create Something Together</h2>
+      <p class="contact__subtitle">
+        Have a project in mind? We'd love to hear about it. Get in touch and let's make something amazing.
+      </p>
+    </div>
+
+    <div class="contact__content">
+      <div class="contact__info">
+        <h3 class="contact__info-title">Reach Out</h3>
+        <div class="contact__links">
+          @for (link of socialLinks; track link.label) {
+            <a
+              [href]="link.href"
+              class="contact__link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="contact__link-icon" aria-hidden="true">{{ link.icon }}</span>
+              <span>{{ link.text }}</span>
+            </a>
+          }
+        </div>
+      </div>
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="contact__form"
+        novalidate
+      >
+        @if (submitted()) {
+          <div class="contact__success" role="alert">
+            Thank you! We'll get back to you shortly.
+          </div>
+        } @else {
+          <div class="contact__fields">
+            <div class="contact__field">
+              <label for="name" class="contact__label">Name <span aria-hidden="true">*</span></label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                class="contact__input"
+                [class.contact__input--error]="name.touched && name.invalid"
+                placeholder="Your name"
+              />
+              @if (name.touched && name.hasError('required')) {
+                <span class="contact__error" role="alert">Name is required</span>
+              }
+            </div>
+
+            <div class="contact__field">
+              <label for="company" class="contact__label">Company</label>
+              <input
+                id="company"
+                type="text"
+                formControlName="company"
+                class="contact__input"
+                placeholder="Your company"
+              />
+            </div>
+
+            <div class="contact__field contact__field--full">
+              <label for="email" class="contact__label">Email <span aria-hidden="true">*</span></label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                class="contact__input"
+                [class.contact__input--error]="email.touched && email.invalid"
+                placeholder="you@company.com"
+              />
+              @if (email.touched && email.hasError('required')) {
+                <span class="contact__error" role="alert">Email is required</span>
+              }
+              @if (email.touched && email.hasError('email')) {
+                <span class="contact__error" role="alert">Please enter a valid email</span>
+              }
+            </div>
+
+            <div class="contact__field contact__field--full">
+              <label for="message" class="contact__label">Message <span aria-hidden="true">*</span></label>
+              <textarea
+                id="message"
+                formControlName="message"
+                class="contact__input contact__textarea"
+                [class.contact__input--error]="message.touched && message.invalid"
+                placeholder="Tell us about your project..."
+                rows="4"
+              ></textarea>
+              @if (message.touched && message.hasError('required')) {
+                <span class="contact__error" role="alert">Message is required</span>
+              }
+              @if (message.touched && message.hasError('minlength')) {
+                <span class="contact__error" role="alert">Message must be at least 10 characters</span>
+              }
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="contact__submit"
+            [disabled]="form.invalid"
+          >
+            Send Message
+          </button>
+        }
+      </form>
+    </div>
+  </div>
+</section>

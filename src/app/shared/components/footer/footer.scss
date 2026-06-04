@@ -1,0 +1,92 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  background: $color-text;
+  color: rgba($color-white, 0.7);
+  padding-block: $spacing-4xl $spacing-xl;
+
+  &__container {
+    @include container;
+  }
+
+  &__brand {
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__logo {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    letter-spacing: -0.02em;
+    display: block;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__logo-accent {
+    color: $color-primary;
+  }
+
+  &__tagline {
+    font-size: $font-size-md;
+    color: rgba($color-white, 0.5);
+    margin-bottom: $spacing-xl;
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+
+  &__social-link {
+    font-size: $font-size-xl;
+    text-decoration: none;
+    transition: transform $transition-fast;
+    color: rgba($color-white, 0.7);
+
+    &:hover {
+      transform: translateY(-2px);
+      color: $color-primary;
+    }
+
+    .footer__social-label {
+      @include visually-hidden;
+    }
+  }
+
+  &__nav {
+    padding-top: $spacing-xl;
+    border-top: 1px solid rgba($color-white, 0.1);
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__nav-list {
+    display: flex;
+    gap: $spacing-2xl;
+    flex-wrap: wrap;
+  }
+
+  &__nav-link {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: rgba($color-white, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__bottom {
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-white, 0.1);
+  }
+
+  &__copyright {
+    font-size: $font-size-xs;
+    color: rgba($color-white, 0.35);
+  }
+}

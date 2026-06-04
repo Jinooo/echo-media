@@ -1,0 +1,37 @@
+<header class="header">
+  <div class="header__container">
+    <a routerLink="/" class="header__logo" (click)="closeMenu()" aria-label="Echo Media Home">
+      <span class="header__logo-text">ECHO<span class="header__logo-accent">.</span>MEDIA</span>
+    </a>
+
+    <nav class="header__nav" [class.header__nav--open]="isMenuOpen()" aria-label="Main navigation">
+      <ul class="header__nav-list">
+        @for (link of navLinks; track link.path) {
+          <li class="header__nav-item">
+            <a
+              class="header__nav-link"
+              [routerLink]="link.path"
+              routerLinkActive="header__nav-link--active"
+              (click)="closeMenu()"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <button
+      class="header__menu-btn"
+      [class.header__menu-btn--open]="isMenuOpen()"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-label="Toggle navigation menu"
+      aria-controls="mobile-nav"
+    >
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+    </button>
+  </div>
+</header>

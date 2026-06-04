@@ -1,0 +1,220 @@
+// ============================================
+// Echo Media - Mock Data: Works
+// ============================================
+
+import type { Work } from '../models';
+
+export const MOCK_WORKS: readonly Work[] = [
+  {
+    slug: 'into1-music-video',
+    title: 'INTO1 - Born to Fly',
+    client: 'INTO1',
+    year: 2024,
+    category: 'music-video',
+    description:
+      'A visually stunning music video that blends surreal imagery with dynamic choreography, capturing the energy and spirit of the group through innovative camera techniques and bold color grading.',
+    role: 'Creative Production & Post Production',
+    tools: ['RED Komodo', 'DaVinci Resolve', 'After Effects', 'Blender'],
+    coverImage: '/assets/images/works/into1-cover.jpg',
+    heroImage: '/assets/images/works/into1-hero.jpg',
+    gallery: [
+      '/assets/images/works/into1-01.jpg',
+      '/assets/images/works/into1-02.jpg',
+      '/assets/images/works/into1-03.jpg',
+      '/assets/images/works/into1-04.jpg',
+    ],
+    videoUrl: 'https://www.youtube.com/embed/example1',
+    credits: [
+      { role: 'Director', name: 'Alex Chen' },
+      { role: 'DP', name: 'Maria Santos' },
+      { role: 'Editor', name: 'James Wright' },
+      { role: 'Colorist', name: 'Luna Park' },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'bmw-innovation-campaign',
+    title: 'BMW Innovation Campaign',
+    client: 'BMW',
+    year: 2024,
+    category: 'commercial',
+    description:
+      'A high-octane commercial campaign showcasing BMW\'s latest electric vehicle line. Sleek cinematography meets cutting-edge virtual production techniques to create an unforgettable visual experience.',
+    role: 'Production & Virtual Production',
+    tools: ['Unreal Engine 5', 'ARRI Alexa 35', 'Houdini', 'Nuke'],
+    coverImage: '/assets/images/works/bmw-cover.jpg',
+    heroImage: '/assets/images/works/bmw-hero.jpg',
+    gallery: [
+      '/assets/images/works/bmw-01.jpg',
+      '/assets/images/works/bmw-02.jpg',
+      '/assets/images/works/bmw-03.jpg',
+      '/assets/images/works/bmw-04.jpg',
+    ],
+    credits: [
+      { role: 'Director', name: 'Michael Torres' },
+      { role: 'DP', name: 'Sarah Kim' },
+      { role: 'VFX Supervisor', name: 'David Liu' },
+      { role: 'Producer', name: 'Emma Wilson' },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'nestle-heritage',
+    title: 'Nestlé Heritage',
+    client: 'Nestlé',
+    year: 2023,
+    category: 'documentary',
+    description:
+      'An intimate documentary exploring the heritage and craftsmanship behind Nestlé\'s most beloved products, told through the stories of the people who make them.',
+    role: 'Full Production',
+    tools: ['Sony FX6', 'Premiere Pro', 'DaVinci Resolve'],
+    coverImage: '/assets/images/works/nestle-cover.jpg',
+    heroImage: '/assets/images/works/nestle-hero.jpg',
+    gallery: [
+      '/assets/images/works/nestle-01.jpg',
+      '/assets/images/works/nestle-02.jpg',
+      '/assets/images/works/nestle-03.jpg',
+    ],
+    credits: [
+      { role: 'Director', name: 'Yuki Tanaka' },
+      { role: 'DP', name: 'Carlos Rivera' },
+      { role: 'Editor', name: 'Priya Sharma' },
+      { role: 'Sound Design', name: 'Tom Baker' },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'bvlgari-eternal',
+    title: 'Bvlgari Eternal',
+    client: 'Bvlgari',
+    year: 2024,
+    category: 'commercial',
+    description:
+      'A luxurious visual journey through Bvlgari\'s latest collection, where each frame is crafted like a Renaissance painting — rich textures, golden light, and timeless elegance.',
+    role: 'Creative Development & Production',
+    tools: ['ARRI Alexa LF', 'Cooke S8/i', 'Baselight'],
+    coverImage: '/assets/images/works/bvlgari-cover.jpg',
+    heroImage: '/assets/images/works/bvlgari-hero.jpg',
+    gallery: [
+      '/assets/images/works/bvlgari-01.jpg',
+      '/assets/images/works/bvlgari-02.jpg',
+      '/assets/images/works/bvlgari-03.jpg',
+      '/assets/images/works/bvlgari-04.jpg',
+    ],
+    credits: [
+      { role: 'Director', name: 'Isabella Rossi' },
+      { role: 'DP', name: 'Jean-Pierre Dubois' },
+      { role: 'Production Designer', name: 'Mei Lin' },
+      { role: 'Colorist', name: 'Robert King' },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'jeep-wild-trails',
+    title: 'Jeep Wild Trails',
+    client: 'Jeep',
+    year: 2023,
+    category: 'commercial',
+    description:
+      'An adrenaline-fueled journey through untamed landscapes. Shot across three continents, this commercial captures the spirit of adventure that defines the Jeep brand.',
+    role: 'Production & Post Production',
+    tools: ['RED Raptor', 'Movi Pro', 'After Effects'],
+    coverImage: '/assets/images/works/jeep-cover.jpg',
+    heroImage: '/assets/images/works/jeep-hero.jpg',
+    gallery: [
+      '/assets/images/works/jeep-01.jpg',
+      '/assets/images/works/jeep-02.jpg',
+      '/assets/images/works/jeep-03.jpg',
+    ],
+    credits: [
+      { role: 'Director', name: 'Jack Morrison' },
+      { role: 'DP', name: 'Ana Gutierrez' },
+      { role: 'Editor', name: 'Chen Wei' },
+      { role: 'Colorist', name: 'Sam Lee' },
+    ],
+    featured: false,
+  },
+  {
+    slug: 'mihoyo-animation-short',
+    title: 'miHoYo Animation Short',
+    client: 'miHoYo',
+    year: 2024,
+    category: 'virtual-production',
+    description:
+      'A groundbreaking animated short that pushes the boundaries of real-time rendering. Created entirely in virtual production, blending game engine technology with cinematic storytelling.',
+    role: 'Virtual Production',
+    tools: ['Unreal Engine 5', 'Motion Capture', 'MetaHuman', 'Houdini'],
+    coverImage: '/assets/images/works/mihoyo-cover.jpg',
+    heroImage: '/assets/images/works/mihoyo-hero.jpg',
+    gallery: [
+      '/assets/images/works/mihoyo-01.jpg',
+      '/assets/images/works/mihoyo-02.jpg',
+      '/assets/images/works/mihoyo-03.jpg',
+      '/assets/images/works/mihoyo-04.jpg',
+    ],
+    videoUrl: 'https://www.youtube.com/embed/example3',
+    credits: [
+      { role: 'Creative Director', name: 'Lin Feng' },
+      { role: 'Technical Director', name: 'Ryan Park' },
+      { role: 'Animation Lead', name: 'Sophie Martin' },
+      { role: 'Producer', name: 'Ken Watanabe' },
+    ],
+    featured: true,
+  },
+  {
+    slug: 'realme-launch-film',
+    title: 'realme Launch Film',
+    client: 'realme',
+    year: 2024,
+    category: 'film',
+    description:
+      'A cinematic brand film for realme\'s flagship launch. Bold, youthful, and energetic — a perfect visual representation of the brand\'s philosophy of innovation.',
+    role: 'Creative Development & Production',
+    tools: ['Sony Venice', 'Atlas Orion', 'DaVinci Resolve'],
+    coverImage: '/assets/images/works/realme-cover.jpg',
+    heroImage: '/assets/images/works/realme-hero.jpg',
+    gallery: [
+      '/assets/images/works/realme-01.jpg',
+      '/assets/images/works/realme-02.jpg',
+    ],
+    credits: [
+      { role: 'Director', name: 'Daniel Park' },
+      { role: 'DP', name: 'Elena Vásquez' },
+      { role: 'Editor', name: 'Marcus Chen' },
+    ],
+    featured: false,
+  },
+  {
+    slug: 'kuro-games-cinematic',
+    title: 'Kuro Games Cinematic Trailer',
+    client: 'Kuro Games',
+    year: 2023,
+    category: 'virtual-production',
+    description:
+      'An epic cinematic trailer created using the latest virtual production technology, bringing game characters to life with unprecedented realism and emotional depth.',
+    role: 'Virtual Production & Post Production',
+    tools: ['Unreal Engine 5', 'Vicon', 'DaVinci Resolve', 'Nuke'],
+    coverImage: '/assets/images/works/kuro-cover.jpg',
+    heroImage: '/assets/images/works/kuro-hero.jpg',
+    gallery: [
+      '/assets/images/works/kuro-01.jpg',
+      '/assets/images/works/kuro-02.jpg',
+      '/assets/images/works/kuro-03.jpg',
+    ],
+    videoUrl: 'https://www.youtube.com/embed/example4',
+    credits: [
+      { role: 'Director', name: 'Hiroshi Yamamoto' },
+      { role: 'VFX Supervisor', name: 'Andrew Park' },
+      { role: 'Animation Director', name: 'Grace Liu' },
+    ],
+    featured: false,
+  },
+];
+
+export const WORK_CATEGORIES: Record<Work['category'], string> = {
+  'film': 'Film',
+  'commercial': 'Commercial',
+  'music-video': 'Music Video',
+  'documentary': 'Documentary',
+  'virtual-production': 'Virtual Production',
+};

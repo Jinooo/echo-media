@@ -1,0 +1,26 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero__bg" [style.transform]="'translateY(' + parallaxY() + 'px)'"></div>
+
+  <div class="hero__content">
+    <div class="hero__brand-logos">
+      @for (brand of brandLogos; track brand) {
+        <span class="hero__brand">{{ brand }}</span>
+      }
+    </div>
+
+    <h1 class="hero__title">
+      <span class="hero__title-line">ECHO MEDIA</span>
+      <span class="hero__title-tagline">Tell The World Your Story</span>
+    </h1>
+
+    <p class="hero__subtitle">
+      A creative production studio bringing stories to life through film, commercial, music video,
+      documentary, and virtual production.
+    </p>
+
+    <div class="hero__actions">
+      <a routerLink="/works" class="hero__btn hero__btn--primary">View Works</a>
+      <a routerLink="/contact" class="hero__btn hero__btn--outline">Contact Us</a>
+    </div>
+  </div>
+</section>

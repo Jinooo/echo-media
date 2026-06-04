@@ -1,0 +1,114 @@
+<main class="team">
+  <!-- Hero -->
+  <section class="team__hero">
+    <div class="team__hero-content">
+      <h1 class="team__title">Our Team</h1>
+      <p class="team__subtitle">
+        A diverse collective of filmmakers, artists, and technologists united by a passion for
+        visual storytelling.
+      </p>
+    </div>
+  </section>
+
+  <div class="team__container">
+    <!-- Founder -->
+    <section class="team__section" aria-labelledby="founder-heading">
+      <h2 class="team__section-label">Founder</h2>
+      <div class="team__founder-grid">
+        @for (member of founders(); track member.id) {
+          <article
+            class="team__card team__card--founder"
+            (click)="openDrawer(member)"
+            (keydown.enter)="openDrawer(member)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'View profile of ' + member.name"
+          >
+            <div class="team__card-photo">
+              <div class="team__card-avatar">{{ member.name.charAt(0) }}</div>
+            </div>
+            <div class="team__card-info">
+              <h3 class="team__card-name">{{ member.name }}</h3>
+              <p class="team__card-role">{{ member.role }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Core Team -->
+    <section class="team__section" aria-labelledby="core-heading">
+      <h2 class="team__section-label">Core Team</h2>
+      <div class="team__grid">
+        @for (member of coreTeam(); track member.id) {
+          <article
+            class="team__card"
+            (click)="openDrawer(member)"
+            (keydown.enter)="openDrawer(member)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'View profile of ' + member.name"
+          >
+            <div class="team__card-photo">
+              <div class="team__card-avatar">{{ member.name.charAt(0) }}</div>
+            </div>
+            <div class="team__card-info">
+              <h3 class="team__card-name">{{ member.name }}</h3>
+              <p class="team__card-role">{{ member.role }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <!-- Collaborators -->
+    <section class="team__section" aria-labelledby="collaborator-heading">
+      <h2 class="team__section-label">Collaborators</h2>
+      <div class="team__grid">
+        @for (member of collaborators(); track member.id) {
+          <article
+            class="team__card"
+            (click)="openDrawer(member)"
+            (keydown.enter)="openDrawer(member)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'View profile of ' + member.name"
+          >
+            <div class="team__card-photo">
+              <div class="team__card-avatar">{{ member.name.charAt(0) }}</div>
+            </div>
+            <div class="team__card-info">
+              <h3 class="team__card-name">{{ member.name }}</h3>
+              <p class="team__card-role">{{ member.role }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  </div>
+
+  <!-- Drawer -->
+  @if (selectedMember(); as member) {
+    <div class="team__drawer-overlay" (click)="closeDrawer()" role="dialog" aria-modal="true">
+      <div class="team__drawer" (click)="$event.stopPropagation()" role="document">
+        <button
+          class="team__drawer-close"
+          (click)="closeDrawer()"
+          aria-label="Close profile drawer"
+        >
+          ✕
+        </button>
+        <div class="team__drawer-photo">
+          <div class="team__drawer-avatar">{{ member.name.charAt(0) }}</div>
+        </div>
+        <h3 class="team__drawer-name">{{ member.name }}</h3>
+        <p class="team__drawer-role">{{ member.role }}</p>
+        <p class="team__drawer-bio">{{ member.bio }}</p>
+        <div class="team__drawer-experience">
+          <h4 class="team__drawer-exp-title">Experience</h4>
+          <p>{{ member.experience }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</main>

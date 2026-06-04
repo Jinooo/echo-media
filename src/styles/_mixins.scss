@@ -1,0 +1,163 @@
+// ============================================
+// Echo Media - SCSS Mixins
+// ============================================
+
+@use 'variables' as *;
+
+// --- Media Queries (Mobile First) ---
+@mixin mobile-landscape {
+  @media (min-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin tablet-lg {
+  @media (min-width: $breakpoint-tablet-lg) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: $breakpoint-laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+// --- Container ---
+@mixin container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+}
+
+// --- Section ---
+@mixin section {
+  padding-block: $section-padding;
+}
+
+@mixin section-sm {
+  padding-block: $section-padding-sm;
+}
+
+// --- Typography ---
+@mixin heading-1 {
+  font-size: clamp(2.5rem, 6vw, $font-size-5xl);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+@mixin heading-2 {
+  font-size: clamp(2rem, 4vw, $font-size-4xl);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+@mixin heading-3 {
+  font-size: clamp(1.25rem, 2.5vw, $font-size-2xl);
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+@mixin body-text {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+@mixin body-text-lg {
+  font-size: clamp(1rem, 1.5vw, $font-size-md);
+  line-height: $line-height-relaxed;
+}
+
+// --- Section Title ---
+@mixin section-title {
+  @include heading-2;
+  margin-bottom: $spacing-md;
+  color: $color-text;
+}
+
+@mixin section-subtitle {
+  @include body-text-lg;
+  color: $color-text-light;
+  margin-bottom: $spacing-2xl;
+  max-width: 600px;
+}
+
+// --- Flex utilities ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// --- Visually hidden (accessible) ---
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// --- Focus visible ---
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+// --- Button base ---
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: 0.75rem 2rem;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  border: none;
+  border-radius: $border-radius-full;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all $transition-base;
+  @include focus-ring;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// --- Scroll reveal animation helper ---
+@mixin scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

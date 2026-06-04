@@ -1,0 +1,45 @@
+<section class="about" aria-labelledby="about-heading">
+  <div class="about__container">
+    <div class="about__header">
+      <p class="about__label">About Echo Media</p>
+      <h2 class="about__heading" id="about-heading">
+        A Creative Studio Built for the Future of Storytelling
+      </h2>
+    </div>
+
+    <div class="about__content">
+      <div class="about__text">
+        <p class="about__body">
+          Founded in <strong>2020</strong>, Echo Media has quickly established itself as a premier
+          creative production studio. We specialize in crafting visual stories that captivate, inspire,
+          and leave a lasting impression — from cinematic commercials to intimate documentaries and
+          cutting-edge virtual productions.
+        </p>
+      </div>
+
+      <div class="about__categories">
+        @for (category of categories; track category) {
+          <span class="about__category-tag">{{ category }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="about__schools">
+      <p class="about__schools-label">Our team comes from</p>
+      <div class="about__schools-list">
+        @for (school of schools; track school) {
+          <span class="about__school">{{ school }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="about__stats">
+      @for (stat of stats; track stat.label) {
+        <div class="about__stat">
+          <span class="about__stat-value">{{ stat.value }}</span>
+          <span class="about__stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
