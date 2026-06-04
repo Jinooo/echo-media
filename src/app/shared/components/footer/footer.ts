@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -6,15 +6,16 @@ import { RouterLink } from '@angular/router';
   templateUrl: './footer.html',
   styleUrls: ['./footer.scss'],
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
   protected readonly currentYear = new Date().getFullYear();
 
   protected readonly socialLinks = [
-    { label: 'Xiaohongshu', href: 'https://www.xiaohongshu.com/user/echomedia', icon: '📕' },
-    { label: 'Bilibili', href: 'https://space.bilibili.com/echomedia', icon: '📺' },
-    { label: 'WeChat', href: '#', icon: '💬' },
-    { label: 'Email', href: 'mailto:hello@echomedia.com', icon: '✉️' },
+    { label: 'Xiaohongshu', href: 'https://www.xiaohongshu.com/user/echomedia' },
+    { label: 'Bilibili', href: 'https://space.bilibili.com/echomedia' },
+    { label: 'WeChat', href: '#', text: 'EchoMedia' },
+    { label: 'Email', href: 'mailto:hello@echomedia.com', text: 'hello@echomedia.com' },
   ];
 
   protected readonly navLinks = [

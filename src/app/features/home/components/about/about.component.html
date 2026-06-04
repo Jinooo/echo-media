@@ -1,31 +1,32 @@
 <section class="about" aria-labelledby="about-heading">
   <div class="about__container">
-    <div class="about__header">
-      <p class="about__label">About Echo Media</p>
+    <header class="about__header">
+      <span class="about__label">About</span>
       <h2 class="about__heading" id="about-heading">
         A Creative Studio Built for the Future of Storytelling
       </h2>
-    </div>
+      <p class="about__subtitle" aria-hidden="true">关于回声浩淼</p>
+    </header>
 
-    <div class="about__content">
+    <div class="about__body">
       <div class="about__text">
-        <p class="about__body">
+        <p class="about__description">
           Founded in <strong>2020</strong>, Echo Media has quickly established itself as a premier
           creative production studio. We specialize in crafting visual stories that captivate, inspire,
-          and leave a lasting impression — from cinematic commercials to intimate documentaries and
-          cutting-edge virtual productions.
+          and leave a lasting impression &mdash; from cinematic commercials to intimate documentaries
+          and cutting-edge virtual productions.
         </p>
       </div>
 
-      <div class="about__categories">
+      <aside class="about__categories">
         @for (category of categories; track category) {
           <span class="about__category-tag">{{ category }}</span>
         }
-      </div>
+      </aside>
     </div>
 
     <div class="about__schools">
-      <p class="about__schools-label">Our team comes from</p>
+      <span class="about__schools-label">Our team comes from</span>
       <div class="about__schools-list">
         @for (school of schools; track school) {
           <span class="about__school">{{ school }}</span>

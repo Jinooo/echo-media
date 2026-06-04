@@ -1,48 +1,54 @@
 @if (notFound()) {
-  <main class="work-detail__not-found">
-    <h1>Project Not Found</h1>
-    <a routerLink="/works">← Back to Works</a>
+  <main class="detail-not-found">
+    <div class="detail-not-found__content">
+      <h1 class="detail-not-found__title">Project Not Found</h1>
+      <p class="detail-not-found__text">The project you're looking for doesn't exist or has been removed.</p>
+      <a routerLink="/works" class="detail-not-found__link">Back to Works</a>
+    </div>
   </main>
 } @else if (work(); as work) {
-  <main class="work-detail">
+  <main class="detail">
     <!-- Hero -->
-    <section class="work-detail__hero">
-      <div class="work-detail__hero-placeholder">
-        <span class="work-detail__hero-icon" aria-hidden="true">
-          @switch (work.category) {
-            @case ('film') { 🎬 }
-            @case ('commercial') { 📺 }
-            @case ('music-video') { 🎵 }
-            @case ('documentary') { 🎥 }
-            @case ('virtual-production') { 🌐 }
-          }
-        </span>
+    <section class="detail__hero">
+      <div class="detail__hero-frame">
+        <span class="detail__hero-label">{{ WORK_CATEGORIES[work.category] }}</span>
       </div>
     </section>
 
     <!-- Project Info -->
-    <section class="work-detail__info">
-      <div class="work-detail__container">
-        <div class="work-detail__header">
-          <p class="work-detail__category">{{ WORK_CATEGORIES[work.category] }}</p>
-          <h1 class="work-detail__title">{{ work.title }}</h1>
-          <div class="work-detail__meta">
-            <span class="work-detail__meta-item"><strong>Client:</strong> {{ work.client }}</span>
-            <span class="work-detail__meta-item"><strong>Year:</strong> {{ work.year }}</span>
-            <span class="work-detail__meta-item"><strong>Role:</strong> {{ work.role }}</span>
+    <section class="detail__info">
+      <div class="detail__container">
+        <div class="detail__header">
+          <p class="detail__category">{{ WORK_CATEGORIES[work.category] }}</p>
+          <h1 class="detail__title">{{ work.title }}</h1>
+          <div class="detail__meta">
+            <div class="detail__meta-item">
+              <span class="detail__meta-label">Client</span>
+              <span class="detail__meta-value">{{ work.client }}</span>
+            </div>
+            <div class="detail__meta-item">
+              <span class="detail__meta-label">Year</span>
+              <span class="detail__meta-value">{{ work.year }}</span>
+            </div>
+            <div class="detail__meta-item">
+              <span class="detail__meta-label">Role</span>
+              <span class="detail__meta-value">{{ work.role }}</span>
+            </div>
           </div>
         </div>
 
-        <div class="work-detail__description">
-          <h2 class="work-detail__section-title">About This Project</h2>
-          <p class="work-detail__body">{{ work.description }}</p>
+        <!-- Description -->
+        <div class="detail__description">
+          <h2 class="detail__section-title">About This Project</h2>
+          <p class="detail__body">{{ work.description }}</p>
         </div>
 
-        <div class="work-detail__tools">
-          <h2 class="work-detail__section-title">Tools & Tech</h2>
-          <div class="work-detail__tool-tags">
+        <!-- Tools -->
+        <div class="detail__tools">
+          <h2 class="detail__section-title">Tools &amp; Tech</h2>
+          <div class="detail__tool-tags">
             @for (tool of work.tools; track tool) {
-              <span class="work-detail__tool-tag">{{ tool }}</span>
+              <span class="detail__tool-tag">{{ tool }}</span>
             }
           </div>
         </div>
@@ -50,14 +56,14 @@
     </section>
 
     <!-- Gallery -->
-    <section class="work-detail__gallery" aria-label="Project gallery">
-      <div class="work-detail__container">
-        <h2 class="work-detail__section-title">Gallery</h2>
-        <div class="work-detail__gallery-grid">
+    <section class="detail__gallery" aria-label="Project gallery">
+      <div class="detail__container">
+        <h2 class="detail__section-title">Gallery</h2>
+        <div class="detail__gallery-grid">
           @for (img of work.gallery; track img; let i = $index) {
-            <div class="work-detail__gallery-item">
-              <div class="work-detail__gallery-placeholder">
-                <span class="work-detail__gallery-number">{{ i + 1 }}</span>
+            <div class="detail__gallery-item">
+              <div class="detail__gallery-placeholder">
+                <span class="detail__gallery-number">{{ i + 1 }}</span>
               </div>
             </div>
           }
@@ -67,26 +73,28 @@
 
     <!-- Video -->
     @if (work.videoUrl) {
-      <section class="work-detail__video" aria-label="Project video">
-        <div class="work-detail__container">
-          <h2 class="work-detail__section-title">Watch</h2>
-          <div class="work-detail__video-placeholder">
-            <span>▶ Video Player</span>
-            <p class="work-detail__video-note">Video URL: {{ work.videoUrl }}</p>
+      <section class="detail__video" aria-label="Project video">
+        <div class="detail__container">
+          <h2 class="detail__section-title">Watch</h2>
+          <div class="detail__video-frame">
+            <div class="detail__video-placeholder">
+              <span class="detail__video-play" aria-hidden="true"></span>
+              <span class="detail__video-label">Play Video</span>
+            </div>
           </div>
         </div>
       </section>
     }
 
     <!-- Credits -->
-    <section class="work-detail__credits" aria-label="Project credits">
-      <div class="work-detail__container">
-        <h2 class="work-detail__section-title">Credits</h2>
-        <div class="work-detail__credits-grid">
+    <section class="detail__credits" aria-label="Project credits">
+      <div class="detail__container">
+        <h2 class="detail__section-title">Credits</h2>
+        <div class="detail__credits-grid">
           @for (credit of work.credits; track credit.role) {
-            <div class="work-detail__credit">
-              <span class="work-detail__credit-role">{{ credit.role }}</span>
-              <span class="work-detail__credit-name">{{ credit.name }}</span>
+            <div class="detail__credit">
+              <span class="detail__credit-role">{{ credit.role }}</span>
+              <span class="detail__credit-name">{{ credit.name }}</span>
             </div>
           }
         </div>
@@ -95,12 +103,12 @@
 
     <!-- Next Project -->
     @if (nextWork()) {
-      <section class="work-detail__next">
-        <div class="work-detail__container">
-          <p class="work-detail__next-label">Next Project</p>
-          <a [routerLink]="['/works', nextWork()!.slug]" class="work-detail__next-link">
-            <span class="work-detail__next-title">{{ nextWork()!.title }}</span>
-            <span class="work-detail__next-arrow">→</span>
+      <section class="detail__next">
+        <div class="detail__container">
+          <p class="detail__next-label">Next Project</p>
+          <a [routerLink]="['/works', nextWork()!.slug]" class="detail__next-link">
+            <span class="detail__next-title">{{ nextWork()!.title }}</span>
+            <span class="detail__next-arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </section>

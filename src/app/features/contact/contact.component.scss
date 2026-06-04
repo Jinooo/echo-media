@@ -2,12 +2,18 @@
 @use 'mixins' as *;
 
 .contact-page {
+  background: $color-bg;
+  color: $color-text;
+  min-height: 100vh;
+
+  // ---- Hero ----
   &__hero {
-    padding-block: 8rem 4rem;
+    padding-block: $spacing-5xl $spacing-3xl;
     text-align: center;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba($color-primary, 0.06) 0%, transparent 60%),
-      $color-background;
+      radial-gradient(ellipse at 50% 0%, rgba($color-accent, 0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba($color-accent, 0.03) 0%, transparent 50%),
+      $color-bg;
   }
 
   &__hero-content {
@@ -16,21 +22,32 @@
 
   &__title {
     @include heading-1;
-    margin-bottom: $spacing-md;
+    color: $color-text;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__subtitle-chinese {
+    font-family: $font-display;
+    font-size: clamp(1.25rem, 2.5vw, $font-size-2xl);
+    font-weight: $font-weight-regular;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
   }
 
   &__subtitle {
     @include body-text-lg;
     max-width: 540px;
     margin-inline: auto;
-    color: $color-text-light;
+    color: $color-text-secondary;
   }
 
+  // ---- Container ----
   &__container {
     @include container;
     padding-block: $section-padding;
   }
 
+  // ---- Layout ----
   &__layout {
     display: grid;
     gap: $spacing-3xl;
@@ -44,7 +61,7 @@
     }
   }
 
-  // Info sidebar
+  // ---- Info Sidebar ----
   &__info {
     @include tablet {
       position: sticky;
@@ -54,13 +71,16 @@
   }
 
   &__info-title {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 2.5vw, $font-size-2xl);
+    font-weight: $font-weight-semibold;
+    color: $color-text;
     margin-bottom: $spacing-md;
   }
 
   &__info-text {
-    color: $color-text-light;
+    @include body-text;
+    color: $color-text-secondary;
     line-height: $line-height-relaxed;
     margin-bottom: $spacing-2xl;
   }
@@ -68,51 +88,49 @@
   &__links {
     display: flex;
     flex-direction: column;
-    gap: $spacing-lg;
+    gap: $spacing-md;
   }
 
   &__link {
-    display: flex;
-    align-items: center;
-    gap: $spacing-md;
-    padding: $spacing-md;
-    background: $color-white;
+    display: block;
+    padding: $spacing-md $spacing-lg;
+    background: $color-surface;
     border: 1px solid $color-border-light;
     border-radius: $border-radius-md;
     text-decoration: none;
-    transition: all $transition-base;
+    transition: border-color $transition-base, box-shadow $transition-base;
 
     &:hover {
-      border-color: $color-primary;
+      border-color: $color-accent;
       box-shadow: $shadow-sm;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
     }
   }
 
-  &__link-icon {
-    font-size: 1.5rem;
-  }
-
   &__link-label {
+    @include label-text;
+    color: $color-accent;
     display: block;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: $color-text-muted;
+    margin-bottom: $spacing-xs;
   }
 
   &__link-text {
+    font-family: $font-body;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
     color: $color-text;
   }
 
-  // Form
+  // ---- Form Section ----
   &__form {
-    background: $color-white;
+    background: $color-surface-raised;
     border: 1px solid $color-border-light;
     border-radius: $border-radius-lg;
     padding: $spacing-2xl;
+    box-shadow: $shadow-sm;
 
     @include tablet {
       padding: $spacing-3xl;
@@ -132,26 +150,28 @@
   }
 
   &__label {
+    @include label-text;
+    color: $color-text-secondary;
     display: block;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    color: $color-text;
     margin-bottom: $spacing-xs;
   }
 
   &__required {
-    color: $color-primary;
+    color: $color-accent;
+    font-style: normal;
   }
 
   &__input {
     width: 100%;
     padding: 0.75rem 1rem;
+    font-family: $font-body;
     font-size: $font-size-base;
     color: $color-text;
-    background: $color-background;
+    background: $color-bg;
     border: 1px solid $color-border;
     border-radius: $border-radius-md;
-    transition: border-color $transition-base;
+    transition: border-color $transition-base, background $transition-base;
+    caret-color: $color-accent;
 
     &::placeholder {
       color: $color-text-muted;
@@ -159,12 +179,17 @@
 
     &:focus {
       outline: none;
-      border-color: $color-primary;
-      background: $color-white;
+      border-color: $color-accent;
+      background: $color-surface-raised;
+      box-shadow: 0 0 0 3px rgba($color-accent, 0.12);
     }
 
     &--error {
-      border-color: #e74c3c;
+      border-color: $color-error;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($color-error, 0.15);
+      }
     }
   }
 
@@ -174,54 +199,67 @@
   }
 
   &__error {
+    font-family: $font-body;
     font-size: $font-size-xs;
-    color: #e74c3c;
+    color: $color-error;
     margin-top: $spacing-xs;
     display: block;
   }
 
+  // ---- Submit Button ----
   &__submit {
-    @include button-base;
+    @include button-primary;
     margin-top: $spacing-xl;
     width: 100%;
-    background: $color-primary;
-    color: $color-white;
     font-size: $font-size-base;
 
-    &:hover:not(:disabled) {
-      background: $color-primary-dark;
-    }
-
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
+
+      &:hover {
+        background: $color-accent;
+      }
     }
   }
 
+  // ---- Success State ----
   &__success {
     text-align: center;
     padding: $spacing-3xl $spacing-xl;
 
-    .contact-page__success-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: $color-primary;
-      color: $color-white;
-      font-size: $font-size-2xl;
-      margin-bottom: $spacing-lg;
-    }
-
     h2 {
-      font-size: $font-size-xl;
+      font-family: $font-display;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $color-text;
       margin-bottom: $spacing-sm;
     }
 
     p {
-      color: $color-text-light;
+      @include body-text;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__success-checkmark {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: $color-accent;
+    margin: 0 auto $spacing-lg;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%) rotate(45deg);
+      width: 16px;
+      height: 28px;
+      border-right: 3px solid $color-white;
+      border-bottom: 3px solid $color-white;
     }
   }
 }

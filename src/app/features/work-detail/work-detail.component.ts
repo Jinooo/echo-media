@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MOCK_WORKS, WORK_CATEGORIES } from '../../core/services/mock-works.data';
 import { SeoService } from '../../core/services/seo.service';
@@ -9,16 +9,17 @@ import type { Work } from '../../core/models';
   templateUrl: './work-detail.component.html',
   styleUrls: ['./work-detail.component.scss'],
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkDetailComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
-  private readonly seo = inject(SeoService);
+  private route = inject(ActivatedRoute);
+  private seo = inject(SeoService);
 
-  protected readonly WORK_CATEGORIES = WORK_CATEGORIES;
-  protected readonly work = signal<Work | null>(null);
-  protected readonly notFound = signal(false);
+  protected WORK_CATEGORIES = WORK_CATEGORIES;
+  protected work = signal<Work | null>(null);
+  protected notFound = signal(false);
 
-  protected readonly nextWork = computed(() => {
+  protected nextWork = computed(() => {
     const current = this.work();
     if (!current) return null;
     const idx = MOCK_WORKS.findIndex(w => w.slug === current.slug);

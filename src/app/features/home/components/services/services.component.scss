@@ -3,76 +3,89 @@
 
 .services {
   @include section;
-  background: $color-background-alt;
+  background: $color-bg;
 
   &__container {
     @include container;
   }
 
   &__header {
-    text-align: center;
     margin-bottom: $spacing-3xl;
   }
 
   &__label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
-    margin-bottom: $spacing-sm;
+    @include section-label;
   }
 
   &__heading {
     @include heading-2;
+    color: $color-text;
   }
 
   &__grid {
     display: grid;
-    gap: $spacing-xl;
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
 
-    @include mobile-landscape {
+    @include tablet {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include tablet-lg {
+    @include laptop {
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @include laptop {
+    @include desktop {
       grid-template-columns: repeat(5, 1fr);
     }
   }
 
   &__card {
-    background: $color-white;
+    position: relative;
+    background: $color-surface;
     padding: $spacing-xl;
-    border-radius: $border-radius-lg;
-    border: 1px solid $color-border-light;
-    transition: all $transition-base;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    transition:
+      border-color $transition-base,
+      transform $transition-base;
 
     &:hover {
+      border-color: $color-accent;
       transform: translateY(-4px);
-      box-shadow: $shadow-md;
-      border-color: $color-primary;
+
+      .services__card-number {
+        color: rgba($color-accent, 0.12);
+      }
     }
   }
 
-  &__card-icon {
-    font-size: 2rem;
+  &__card-number {
     display: block;
+    font-family: $font-display;
+    font-size: clamp(3rem, 5vw, $font-size-4xl);
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    color: $color-border-light;
     margin-bottom: $spacing-md;
+    transition: color $transition-base;
   }
 
   &__card-title {
-    font-size: $font-size-base;
+    font-family: $font-display;
+    font-size: $font-size-lg;
     font-weight: $font-weight-semibold;
-    margin-bottom: $spacing-sm;
+    line-height: $line-height-snug;
+    color: $color-text;
+    margin: 0 0 $spacing-sm;
   }
 
   &__card-desc {
+    font-family: $font-body;
     font-size: $font-size-sm;
-    color: $color-text-light;
+    font-weight: $font-weight-regular;
     line-height: $line-height-relaxed;
+    color: $color-text-secondary;
+    margin: 0;
   }
 }

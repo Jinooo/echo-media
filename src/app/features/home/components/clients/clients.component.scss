@@ -3,67 +3,81 @@
 
 .clients {
   @include section;
+  background: $color-surface-alt;
 
   &__container {
     @include container;
   }
 
+  // --- Header ---
   &__header {
     text-align: center;
     margin-bottom: $spacing-3xl;
   }
 
   &__label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
-    margin-bottom: $spacing-sm;
+    @include section-label;
   }
 
   &__heading {
     @include heading-2;
+    color: $color-text;
   }
 
-  &__logo-wall {
+  // --- Grid ---
+  &__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: $spacing-xl;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    border: 1px solid $color-border-light;
+    background: $color-border-light;
 
     @include tablet {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
     @include tablet-lg {
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
 
     @include laptop {
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 
-  &__logo-item {
+  // --- Card ---
+  &__card {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-xl;
-    background: $color-white;
-    border-radius: $border-radius-md;
+    padding: $spacing-xl $spacing-lg;
+    background: $color-surface;
     border: 1px solid $color-border-light;
-    transition: all $transition-base;
+    transition: border-color $transition-base, background-color $transition-base;
+    cursor: default;
+    user-select: none;
+    min-height: 80px;
+    box-sizing: border-box;
 
     &:hover {
-      border-color: $color-primary;
-      box-shadow: $shadow-sm;
+      border-color: $color-accent;
+      background: $color-surface-raised;
     }
   }
 
-  &__logo-placeholder {
-    font-size: $font-size-base;
-    font-weight: $font-weight-semibold;
-    color: $color-text;
-    letter-spacing: -0.01em;
+  &__card-name {
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color $transition-base;
+
+    .clients__card:hover & {
+      color: $color-text;
+    }
   }
 }

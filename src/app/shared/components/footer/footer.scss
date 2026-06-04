@@ -2,91 +2,110 @@
 @use 'mixins' as *;
 
 .footer {
-  background: $color-text;
-  color: rgba($color-white, 0.7);
+  background: $color-surface;
+  border-top: 1px solid $color-border;
   padding-block: $spacing-4xl $spacing-xl;
 
   &__container {
     @include container;
   }
 
+  &__grid {
+    display: grid;
+    gap: $spacing-3xl;
+    margin-bottom: $spacing-4xl;
+
+    @include tablet {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+  }
+
   &__brand {
-    margin-bottom: $spacing-3xl;
+    @include tablet {
+      max-width: 360px;
+    }
   }
 
   &__logo {
+    font-family: $font-display;
     font-size: $font-size-xl;
     font-weight: $font-weight-bold;
-    color: $color-white;
-    letter-spacing: -0.02em;
+    color: $color-text;
+    letter-spacing: -0.01em;
     display: block;
     margin-bottom: $spacing-sm;
   }
 
   &__logo-accent {
-    color: $color-primary;
+    color: $color-accent;
   }
 
   &__tagline {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__chinese {
+    font-family: $font-display;
     font-size: $font-size-md;
-    color: rgba($color-white, 0.5);
-    margin-bottom: $spacing-xl;
+    color: $color-text-muted;
+    letter-spacing: $letter-spacing-wide;
   }
 
-  &__social {
-    display: flex;
-    gap: $spacing-lg;
-    flex-wrap: wrap;
-  }
-
-  &__social-link {
-    font-size: $font-size-xl;
-    text-decoration: none;
-    transition: transform $transition-fast;
-    color: rgba($color-white, 0.7);
-
-    &:hover {
-      transform: translateY(-2px);
-      color: $color-primary;
-    }
-
-    .footer__social-label {
-      @include visually-hidden;
-    }
-  }
-
-  &__nav {
-    padding-top: $spacing-xl;
-    border-top: 1px solid rgba($color-white, 0.1);
-    margin-bottom: $spacing-2xl;
+  &__nav-label {
+    @include label-text;
+    color: $color-text-muted;
+    margin-bottom: $spacing-lg;
   }
 
   &__nav-list {
     display: flex;
-    gap: $spacing-2xl;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: $spacing-sm;
   }
 
   &__nav-link {
     font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    color: rgba($color-white, 0.7);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    color: $color-text-secondary;
     transition: color $transition-fast;
 
     &:hover {
-      color: $color-primary;
+      color: $color-accent;
     }
   }
 
+  &__social-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__social-link {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__social-text {
+    display: block;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin-top: 2px;
+  }
+
   &__bottom {
-    padding-top: $spacing-lg;
-    border-top: 1px solid rgba($color-white, 0.1);
+    padding-top: $spacing-xl;
+    border-top: 1px solid $color-border;
   }
 
   &__copyright {
     font-size: $font-size-xs;
-    color: rgba($color-white, 0.35);
+    color: $color-text-muted;
+    margin: 0;
   }
 }

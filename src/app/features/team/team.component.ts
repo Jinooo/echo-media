@@ -1,4 +1,5 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { MOCK_TEAM } from '../../core/services/mock-team.data';
 import { SeoService } from '../../core/services/seo.service';
 import type { TeamMember } from '../../core/models';
@@ -7,21 +8,23 @@ import type { TeamMember } from '../../core/models';
   selector: 'app-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamComponent implements OnInit {
   private readonly seo = inject(SeoService);
+  private readonly document = inject(DOCUMENT);
 
-  protected readonly selectedMember = signal<TeamMember | null>(null);
+  protected selectedMember = signal<TeamMember | null>(null);
 
-  protected readonly founders = computed(() =>
+  protected founders = computed(() =>
     MOCK_TEAM.filter(m => m.category === 'founder')
   );
 
-  protected readonly coreTeam = computed(() =>
+  protected coreTeam = computed(() =>
     MOCK_TEAM.filter(m => m.category === 'core')
   );
 
-  protected readonly collaborators = computed(() =>
+  protected collaborators = computed(() =>
     MOCK_TEAM.filter(m => m.category === 'collaborator')
   );
 
@@ -34,13 +37,18 @@ export class TeamComponent implements OnInit {
     });
   }
 
+  @HostListener('window:keydown.escape')
+  protected onEscapeKey(): void {
+    this.closeDrawer();
+  }
+
   protected openDrawer(member: TeamMember): void {
     this.selectedMember.set(member);
-    document.body.style.overflow = 'hidden';
+    this.document.body.style.overflow = 'hidden';
   }
 
   protected closeDrawer(): void {
     this.selectedMember.set(null);
-    document.body.style.overflow = '';
+    this.document.body.style.overflow = '';
   }
 }

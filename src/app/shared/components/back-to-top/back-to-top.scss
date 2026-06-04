@@ -1,0 +1,37 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.back-to-top {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  z-index: $z-sticky;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $color-surface-raised;
+  border: 1px solid $color-border;
+  color: $color-text-secondary;
+  @include flex-center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: all $transition-base;
+
+  &.is-visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    background: $color-accent;
+    border-color: $color-accent;
+    color: $color-white;
+  }
+}
+
+.back-to-top__arrow {
+  font-size: $font-size-lg;
+  line-height: 1;
+}

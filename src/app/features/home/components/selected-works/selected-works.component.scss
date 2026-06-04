@@ -3,116 +3,168 @@
 
 .works {
   @include section;
+  background: $color-bg;
 
   &__container {
     @include container;
   }
 
+  // --- Header ---
   &__header {
     text-align: center;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-3xl;
   }
 
   &__label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
-    margin-bottom: $spacing-sm;
+    @include section-label;
   }
 
   &__heading {
     @include heading-2;
+    color: $color-text;
   }
 
+  // --- Filters ---
   &__filters {
     display: flex;
     justify-content: center;
-    gap: $spacing-sm;
+    gap: 0;
     flex-wrap: wrap;
     margin-bottom: $spacing-3xl;
+    border-bottom: 1px solid $color-border-light;
   }
 
   &__filter-btn {
-    padding: 0.5rem 1.5rem;
+    @include body-text;
+    padding: $spacing-sm $spacing-lg;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
+    color: $color-text-secondary;
     background: transparent;
-    border: 1px solid $color-border;
-    border-radius: $border-radius-full;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
     cursor: pointer;
-    transition: all $transition-base;
-    color: $color-text-light;
+    transition: color $transition-fast, border-color $transition-fast;
+    margin-bottom: -1px;
+    letter-spacing: 0.04em;
 
     &:hover {
-      border-color: $color-primary;
-      color: $color-primary;
+      color: $color-text;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: -2px;
     }
 
     &--active {
-      background: $color-primary;
-      border-color: $color-primary;
-      color: $color-white;
+      color: $color-accent;
+      border-bottom-color: $color-accent;
 
       &:hover {
-        color: $color-white;
+        color: $color-accent-light;
       }
     }
   }
 
+  // --- Grid ---
   &__grid {
-    columns: 1;
-    column-gap: $grid-gap;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
 
     @include mobile-landscape {
-      columns: 2;
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @include tablet-lg {
-      columns: 3;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
+  // --- Card ---
   &__card {
     display: block;
-    break-inside: avoid;
-    margin-bottom: $grid-gap;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    border: 1px solid $color-border-light;
+    background: $color-surface;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
 
     &:hover {
+      transform: translateY(-4px);
+      border-color: $color-border;
+      box-shadow: 0 12px 40px rgba($color-text, 0.08);
+
       .works__card-overlay {
         opacity: 1;
       }
+    }
+
+    &:focus-visible {
+      @include focus-ring;
     }
   }
 
   &__card-image {
     position: relative;
-    border-radius: $border-radius-lg;
     overflow: hidden;
-    margin-bottom: $spacing-md;
-    background: $color-background-alt;
   }
 
   &__card-placeholder {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, $color-accent, $color-background-alt);
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: $spacing-md;
+    background:
+      linear-gradient(135deg, $color-surface-alt 0%, $color-surface-raised 50%, $color-surface 100%);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba($color-accent, 0.08) 0%, transparent 70%);
+      transform: rotate(-15deg);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -5%;
+      width: 50%;
+      height: 60%;
+      background: radial-gradient(ellipse at center, rgba($color-accent, 0.05) 0%, transparent 70%);
+      transform: rotate(10deg);
+    }
   }
 
-  &__card-icon {
-    font-size: 2.5rem;
+  &__card-category {
+    @include label-text;
+    color: $color-text-secondary;
+    background: rgba($color-surface, 0.85);
+    border: 1px solid $color-border-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(4px);
   }
 
   &__card-overlay {
     position: absolute;
     inset: 0;
-    background: rgba($color-text, 0.7);
+    background: linear-gradient(to top, rgba($color-bg, 0.92) 0%, rgba($color-accent, 0.15) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,44 +173,71 @@
   }
 
   &__card-view {
-    color: $color-white;
-    font-weight: $font-weight-medium;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+    border-bottom: 1px solid $color-accent;
+    padding-bottom: $spacing-xs;
   }
 
+  // --- Card Info ---
   &__card-info {
-    padding-inline: $spacing-xs;
+    padding: $spacing-lg;
   }
 
   &__card-title {
-    font-size: $font-size-base;
+    font-family: $font-display;
+    font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
-    margin-bottom: $spacing-xs;
+    color: $color-text;
+    line-height: $line-height-snug;
+    margin-bottom: $spacing-sm;
   }
 
   &__card-meta {
-    font-size: $font-size-sm;
-    color: $color-text-muted;
     display: flex;
+    align-items: center;
     gap: $spacing-sm;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
   }
 
+  &__card-client {
+    color: $color-text-secondary;
+  }
+
+  &__card-separator {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: $color-text-muted;
+  }
+
+  &__card-year {
+    color: $color-text-muted;
+    font-variant-numeric: tabular-nums;
+  }
+
+  // --- CTA ---
   &__cta {
     text-align: center;
     margin-top: $spacing-3xl;
   }
 
   &__cta-btn {
-    @include button-base;
-    border: 1.5px solid $color-border;
-    color: $color-text;
-    background: transparent;
+    @include button-outline;
+    padding: 1rem 2.5rem;
+    font-size: $font-size-sm;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
 
-    &:hover {
-      border-color: $color-primary;
-      color: $color-primary;
+    &::after {
+      content: ' \2192';
     }
   }
 }
-
-
-

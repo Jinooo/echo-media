@@ -2,12 +2,18 @@
 @use 'mixins' as *;
 
 .team {
+  background: $color-bg;
+  color: $color-text;
+  min-height: 100vh;
+
+  // ---- Hero ----
   &__hero {
-    padding-block: 8rem 4rem;
+    padding-block: $spacing-5xl $spacing-3xl;
     text-align: center;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba($color-primary, 0.06) 0%, transparent 60%),
-      $color-background;
+      radial-gradient(ellipse at 50% 0%, rgba($color-accent, 0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba($color-accent, 0.03) 0%, transparent 50%),
+      $color-bg;
   }
 
   &__hero-content {
@@ -16,35 +22,49 @@
 
   &__title {
     @include heading-1;
-    margin-bottom: $spacing-md;
+    color: $color-text;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__subtitle-chinese {
+    font-family: $font-display;
+    font-size: clamp(1.25rem, 2.5vw, $font-size-2xl);
+    font-weight: $font-weight-regular;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
   }
 
   &__subtitle {
     @include body-text-lg;
     max-width: 560px;
     margin-inline: auto;
-    color: $color-text-light;
+    color: $color-text-secondary;
   }
 
+  // ---- Container ----
   &__container {
     @include container;
     padding-block: $section-padding;
   }
 
+  // ---- Section ----
   &__section {
-    margin-bottom: $spacing-4xl;
+    margin-bottom: $spacing-5xl;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   &__section-label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
-    margin-bottom: $spacing-2xl;
+    @include section-label;
     text-align: center;
+    color: $color-accent;
+    margin-bottom: $spacing-2xl;
+    font-size: $font-size-xs;
   }
 
+  // ---- Grids ----
   &__founder-grid {
     display: flex;
     justify-content: center;
@@ -67,82 +87,96 @@
     }
   }
 
+  // ---- Card ----
   &__card {
-    background: $color-white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    background: $color-surface;
     border: 1px solid $color-border-light;
     border-radius: $border-radius-lg;
-    padding: $spacing-xl;
+    padding: $spacing-2xl $spacing-xl;
     text-align: center;
     cursor: pointer;
-    transition: all $transition-base;
+    font-family: inherit;
+    color: inherit;
+    width: 100%;
+    transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       transform: translateY(-4px);
-      box-shadow: $shadow-md;
-      border-color: $color-primary;
+      border-color: $color-accent;
+      box-shadow: $shadow-md, $shadow-glow;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      border-color: $color-accent;
     }
 
     &--founder {
       max-width: 360px;
-      width: 100%;
     }
-  }
-
-  &__card-photo {
-    margin-bottom: $spacing-md;
-    display: flex;
-    justify-content: center;
   }
 
   &__card-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: linear-gradient(135deg, $color-primary, $color-secondary);
+    background: linear-gradient(135deg, $color-accent, $color-accent-dark);
     color: $color-white;
     @include flex-center;
+    font-family: $font-display;
     font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
+    flex-shrink: 0;
   }
 
   &__card-name {
+    font-family: $font-body;
     font-size: $font-size-md;
     font-weight: $font-weight-semibold;
+    color: $color-text;
     margin-bottom: $spacing-xs;
   }
 
   &__card-role {
+    font-family: $font-body;
     font-size: $font-size-sm;
     color: $color-text-muted;
   }
 
-  // Drawer
+  // ---- Drawer Overlay ----
   &__drawer-overlay {
     position: fixed;
     inset: 0;
     z-index: $z-modal;
-    background: rgba($color-text, 0.6);
-    backdrop-filter: blur(4px);
+    background: rgba($color-bg, 0.75);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     animation: fadeIn 0.2s ease;
   }
 
+  // ---- Drawer Panel ----
   &__drawer {
-    background: $color-white;
+    background: $color-surface;
+    border-top: 1px solid $color-border;
     border-radius: $border-radius-xl $border-radius-xl 0 0;
-    padding: $spacing-3xl $spacing-xl $spacing-2xl;
+    padding: $spacing-3xl $spacing-xl $spacing-3xl;
     max-width: 600px;
     width: 100%;
     max-height: 85vh;
     overflow-y: auto;
     position: relative;
-    animation: slideUp 0.3s ease;
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    color: $color-text;
 
     @include tablet {
       border-radius: $border-radius-xl;
+      border: 1px solid $color-border;
       margin-bottom: $spacing-xl;
     }
   }
@@ -151,81 +185,101 @@
     position: absolute;
     top: $spacing-lg;
     right: $spacing-lg;
-    background: $color-background-alt;
-    border: none;
+    background: $color-surface-raised;
+    border: 1px solid $color-border;
+    color: $color-text-secondary;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    font-size: $font-size-base;
+    font-size: $font-size-lg;
     cursor: pointer;
     @include flex-center;
-    transition: background $transition-fast;
+    transition: background $transition-fast, color $transition-fast, border-color $transition-fast;
+    line-height: 1;
 
     &:hover {
-      background: $color-border;
+      background: $color-accent;
+      color: $color-white;
+      border-color: $color-accent;
     }
-  }
 
-  &__drawer-photo {
-    margin-bottom: $spacing-lg;
-    display: flex;
-    justify-content: center;
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 
   &__drawer-avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: linear-gradient(135deg, $color-primary, $color-secondary);
+    background: linear-gradient(135deg, $color-accent, $color-accent-dark);
     color: $color-white;
     @include flex-center;
+    font-family: $font-display;
     font-size: $font-size-3xl;
     font-weight: $font-weight-bold;
+    margin: 0 auto $spacing-lg;
   }
 
   &__drawer-name {
-    font-size: $font-size-xl;
+    font-family: $font-display;
+    font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
     text-align: center;
+    color: $color-text;
     margin-bottom: $spacing-xs;
   }
 
   &__drawer-role {
+    font-family: $font-body;
     font-size: $font-size-sm;
-    color: $color-primary;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    color: $color-accent;
     text-align: center;
-    font-weight: $font-weight-medium;
     margin-bottom: $spacing-xl;
   }
 
   &__drawer-bio {
     @include body-text;
-    color: $color-text-light;
+    color: $color-text-secondary;
     margin-bottom: $spacing-xl;
     line-height: $line-height-relaxed;
+    text-align: center;
   }
 
   &__drawer-experience {
-    background: $color-background-alt;
-    padding: $spacing-lg;
+    background: $color-surface-alt;
+    border: 1px solid $color-border-light;
     border-radius: $border-radius-md;
+    padding: $spacing-lg;
   }
 
   &__drawer-exp-title {
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    @include label-text;
+    color: $color-accent;
     margin-bottom: $spacing-sm;
-    color: $color-text;
+  }
+}
+
+// ---- Keyframes ----
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes slideUp {
   from {
     transform: translateY(100%);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
 }

@@ -1,84 +1,123 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+// ============================================
+// Contact CTA Section — Cinematic Brutalism
+// ============================================
+
 .contact {
   @include section;
-  background: $color-text;
-  color: $color-white;
+  background: $color-surface;
+  color: $color-text;
 
   &__container {
     @include container;
   }
 
-  &__header {
-    text-align: center;
-    margin-bottom: $spacing-3xl;
-  }
-
-  &__heading {
-    @include heading-2;
-    color: $color-white;
-    margin-bottom: $spacing-md;
-  }
-
-  &__subtitle {
-    @include body-text-lg;
-    color: rgba($color-white, 0.6);
-    max-width: 500px;
-    margin-inline: auto;
-  }
-
-  &__content {
+  // --- Grid layout ---
+  &__grid {
     display: grid;
     gap: $spacing-3xl;
 
     @include tablet {
       grid-template-columns: 1fr 2fr;
+      gap: $spacing-5xl;
     }
   }
 
-  &__info-title {
-    font-size: $font-size-lg;
+  // --- Left column: info ---
+  &__label {
+    @include section-label;
+  }
+
+  &__heading {
+    @include heading-2;
+    color: $color-text;
+    margin-bottom: $spacing-md;
+  }
+
+  &__subtitle {
+    @include body-text-lg;
+    color: $color-text-secondary;
+    max-width: 42ch;
+  }
+
+  // --- Social links ---
+  &__social {
+    margin-top: $spacing-3xl;
+  }
+
+  &__social-heading {
+    font-family: $font-display;
+    font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
-    color: $color-white;
-    margin-bottom: $spacing-xl;
+    color: $color-text;
+    margin-bottom: $spacing-lg;
   }
 
   &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: $spacing-sm;
+  }
+
+  &__link-item {
+    margin: 0;
+    padding: 0;
   }
 
   &__link {
     display: flex;
-    align-items: center;
-    gap: $spacing-sm;
-    font-size: $font-size-sm;
-    color: rgba($color-white, 0.7);
+    align-items: baseline;
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+    color: $color-text-secondary;
     text-decoration: none;
-    transition: color $transition-fast;
+    border-bottom: 1px solid $color-border-light;
+    transition: color $transition-fast, border-color $transition-fast;
+    @include focus-ring;
 
     &:hover {
-      color: $color-primary;
+      color: $color-accent;
+      border-bottom-color: $color-accent;
     }
   }
 
-  &__link-icon {
-    font-size: 1.125rem;
+  &__link-label {
+    font-family: $font-body;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+    color: $color-text-muted;
+    min-width: 7rem;
+  }
+
+  &__link-text {
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+  }
+
+  // --- Right column: form ---
+  &__form-wrapper {
+    display: flex;
+    flex-direction: column;
   }
 
   &__form {
-    background: rgba($color-white, 0.05);
-    border: 1px solid rgba($color-white, 0.1);
-    border-radius: $border-radius-lg;
-    padding: $spacing-2xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
   }
 
   &__fields {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: $spacing-lg;
+    gap: $spacing-xl;
 
     @include tablet {
       grid-template-columns: 1fr 1fr;
@@ -86,87 +125,132 @@
   }
 
   &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
     &--full {
       grid-column: 1 / -1;
     }
   }
 
-  &__label {
-    display: block;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    color: rgba($color-white, 0.8);
-    margin-bottom: $spacing-xs;
+  // --- Form labels ---
+  &__field-label {
+    @include label-text;
+    color: $color-text-secondary;
 
-    span {
-      color: $color-primary;
+    .contact__required {
+      color: $color-accent;
     }
   }
 
+  // --- Form inputs ---
   &__input {
     width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: $font-size-base;
-    color: $color-white;
-    background: rgba($color-white, 0.08);
-    border: 1px solid rgba($color-white, 0.15);
-    border-radius: $border-radius-md;
-    transition: border-color $transition-base;
+    padding: 0.875rem 1rem;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    line-height: $line-height-base;
+    color: $color-text;
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+    box-sizing: border-box;
 
     &::placeholder {
-      color: rgba($color-white, 0.35);
+      color: $color-text-muted;
     }
 
     &:focus {
       outline: none;
-      border-color: $color-primary;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px rgba($color-accent, 0.25);
     }
 
     &--error {
-      border-color: #e74c3c;
+      border-color: $color-error;
+
+      &:focus {
+        box-shadow: 0 0 0 1px rgba($color-error, 0.25);
+      }
     }
   }
 
   &__textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 130px;
   }
 
+  // --- Error text ---
   &__error {
+    font-family: $font-body;
     font-size: $font-size-xs;
-    color: #e74c3c;
-    margin-top: $spacing-xs;
-    display: block;
+    color: $color-error;
+    padding-top: 2px;
   }
 
+  // --- Submit button ---
   &__submit {
-    @include button-base;
-    margin-top: $spacing-xl;
+    @include button-primary;
     width: 100%;
-    background: $color-primary;
-    color: $color-white;
-    font-size: $font-size-base;
-
-    &:hover:not(:disabled) {
-      background: $color-primary-dark;
-    }
+    padding-block: 1rem;
 
     &:disabled {
-      opacity: 0.5;
+      opacity: 0.45;
       cursor: not-allowed;
+
+      &:hover {
+        background: $color-accent;
+      }
+
+      &:active {
+        transform: none;
+      }
     }
   }
 
+  // --- Success state ---
   &__success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: $spacing-3xl;
-    color: $color-primary-light;
-    font-size: $font-size-lg;
-    font-weight: $font-weight-medium;
+    padding: $spacing-4xl $spacing-2xl;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    background: $color-bg;
   }
-}
 
-// Hide label asterisk from screen reader
-[aria-hidden='true'] {
-  speak: none;
+  &__success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: rgba($color-accent, 0.12);
+    margin-bottom: $spacing-xl;
+    position: relative;
+
+    // CSS-only checkmark
+    &::after {
+      content: '';
+      display: block;
+      width: 0.625rem;
+      height: 1.25rem;
+      border: solid $color-accent;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+  }
+
+  &__success-text {
+    @include heading-3;
+    color: $color-text;
+    max-width: 28ch;
+    margin: 0;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MOCK_WORKS, WORK_CATEGORIES } from '../../core/services/mock-works.data';
@@ -10,24 +10,25 @@ import type { WorkCategory } from '../../core/models';
   templateUrl: './works.component.html',
   styleUrls: ['./works.component.scss'],
   imports: [RouterLink, FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorksComponent implements OnInit {
-  private readonly seo = inject(SeoService);
+  private seo = inject(SeoService);
 
-  protected readonly WORK_CATEGORIES = WORK_CATEGORIES;
-  protected readonly allWorks = MOCK_WORKS;
+  protected WORK_CATEGORIES = WORK_CATEGORIES;
+  protected allWorks = MOCK_WORKS;
 
-  protected readonly activeFilter = signal<WorkCategory | 'all'>('all');
-  protected readonly searchQuery = signal('');
-  protected readonly currentPage = signal(1);
-  protected readonly pageSize = 6;
+  protected activeFilter = signal<WorkCategory | 'all'>('all');
+  protected searchQuery = signal('');
+  protected currentPage = signal(1);
+  protected pageSize = 6;
 
-  protected readonly categories: Array<{ key: WorkCategory | 'all'; label: string }> = [
+  protected categories: Array<{ key: WorkCategory | 'all'; label: string }> = [
     { key: 'all', label: 'All' },
     ...Object.entries(WORK_CATEGORIES).map(([key, label]) => ({ key: key as WorkCategory, label })),
   ];
 
-  protected readonly filteredWorks = computed(() => {
+  protected filteredWorks = computed(() => {
     let works = this.allWorks;
     const filter = this.activeFilter();
     const search = this.searchQuery().toLowerCase().trim();
@@ -48,18 +49,17 @@ export class WorksComponent implements OnInit {
     return works;
   });
 
-  protected readonly totalPages = computed(() =>
+  protected totalPages = computed(() =>
     Math.max(1, Math.ceil(this.filteredWorks().length / this.pageSize))
   );
 
-  protected readonly paginatedWorks = computed(() => {
+  protected paginatedWorks = computed(() => {
     const start = (this.currentPage() - 1) * this.pageSize;
     return this.filteredWorks().slice(start, start + this.pageSize);
   });
 
-  protected readonly pages = computed(() => {
+  protected pages = computed(() => {
     const total = this.totalPages();
-    const current = this.currentPage();
     const pages: number[] = [];
     for (let i = 1; i <= total; i++) {
       pages.push(i);

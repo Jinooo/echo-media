@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--color-bg, #FDFAF6);
 }
 
 main {
   flex: 1;
+  outline: none;
 }

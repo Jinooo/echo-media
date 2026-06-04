@@ -1,5 +1,6 @@
 // ============================================
 // Echo Media - Global Styles
+// Aesthetic: Warm Editorial
 // ============================================
 
 @use 'variables' as *;
@@ -19,23 +20,24 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background-color: $color-bg;
 }
 
 body {
-  font-family: $font-family-base;
+  font-family: $font-body;
   font-size: $font-size-base;
   font-weight: $font-weight-regular;
   line-height: $line-height-base;
   color: $color-text;
-  background-color: $color-background;
+  background-color: $color-bg;
   overflow-x: hidden;
 }
 
 // --- Typography ---
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-family-heading;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-tight;
+  font-family: $font-display;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
   color: $color-text;
 }
 
@@ -44,12 +46,12 @@ p {
 }
 
 a {
-  color: $color-primary;
+  color: $color-accent;
   text-decoration: none;
   transition: color $transition-fast;
 
   &:hover {
-    color: $color-primary-dark;
+    color: $color-accent-dark;
   }
 }
 
@@ -66,38 +68,41 @@ ul, ol {
 button {
   font-family: inherit;
   cursor: pointer;
+  color: inherit;
 
   &:disabled {
     cursor: not-allowed;
+    opacity: 0.4;
   }
 }
 
 input,
 textarea,
 select {
-  font-family: inherit;
+  font-family: $font-body;
   font-size: inherit;
+  color: inherit;
 }
 
 // --- Focus Styles ---
 :focus-visible {
-  outline: 2px solid $color-primary;
-  outline-offset: 2px;
+  outline: 2px solid $color-accent;
+  outline-offset: 3px;
 }
 
 // --- Selection ---
 ::selection {
-  background-color: $color-primary;
+  background-color: $color-accent;
   color: $color-white;
 }
 
 // --- Scrollbar ---
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: $color-background;
+  background: $color-bg;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -106,6 +111,24 @@ select {
 
   &:hover {
     background: $color-text-muted;
+  }
+}
+
+// --- Skip Link ---
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: $spacing-md;
+  z-index: $z-toast + 1;
+  padding: $spacing-sm $spacing-lg;
+  background: $color-accent;
+  color: $color-white;
+  font-weight: $font-weight-semibold;
+  border-radius: $border-radius-sm;
+  transition: top $transition-fast;
+
+  &:focus {
+    top: $spacing-md;
   }
 }
 
@@ -129,15 +152,15 @@ select {
   @include scroll-reveal;
 }
 
-// --- Page Transition ---
-.page-transition {
-  animation: fadeInUp 0.6s ease-out;
+// --- Page Transitions ---
+.page-enter {
+  animation: pageIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes fadeInUp {
+@keyframes pageIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -148,4 +171,51 @@ select {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// --- Section Divider ---
+.cinematic-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    $color-border 20%,
+    $color-border 80%,
+    transparent
+  );
+  margin-block: $section-padding;
 }

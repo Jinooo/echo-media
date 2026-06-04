@@ -1,9 +1,9 @@
 <section class="works" aria-labelledby="works-heading">
   <div class="works__container">
-    <div class="works__header">
-      <p class="works__label">Selected Works</p>
+    <header class="works__header">
+      <span class="works__label">Selected Works</span>
       <h2 class="works__heading" id="works-heading">Featured Projects</h2>
-    </div>
+    </header>
 
     <div class="works__filters" role="tablist" aria-label="Filter works by category">
       @for (cat of categories; track cat.key) {
@@ -26,27 +26,19 @@
           class="works__card"
         >
           <div class="works__card-image">
-            <div class="works__card-placeholder" [attr.data-category]="work.category">
-              <span class="works__card-icon">
-                @switch (work.category) {
-                  @case ('film') { 🎬 }
-                  @case ('commercial') { 📺 }
-                  @case ('music-video') { 🎵 }
-                  @case ('documentary') { 🎥 }
-                  @case ('virtual-production') { 🌐 }
-                }
-              </span>
+            <div class="works__card-placeholder">
+              <span class="works__card-category">{{ WORK_CATEGORIES[work.category] }}</span>
             </div>
             <div class="works__card-overlay">
-              <span class="works__card-view">View Project →</span>
+              <span class="works__card-view">View Project</span>
             </div>
           </div>
           <div class="works__card-info">
             <h3 class="works__card-title">{{ work.title }}</h3>
             <p class="works__card-meta">
-              <span>{{ WORK_CATEGORIES[work.category] }}</span>
-              <span aria-hidden="true">·</span>
-              <span>{{ work.year }}</span>
+              <span class="works__card-client">{{ work.client }}</span>
+              <span class="works__card-separator" aria-hidden="true"></span>
+              <span class="works__card-year">{{ work.year }}</span>
             </p>
           </div>
         </a>
@@ -54,7 +46,7 @@
     </div>
 
     <div class="works__cta">
-      <a routerLink="/works" class="works__cta-btn">View All Works →</a>
+      <a routerLink="/works" class="works__cta-btn">View All Works</a>
     </div>
   </div>
 </section>

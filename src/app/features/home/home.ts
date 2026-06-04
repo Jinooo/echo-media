@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HeroSectionComponent } from './components/hero/hero.component';
 import { AboutSectionComponent } from './components/about/about.component';
 import { SelectedWorksComponent } from './components/selected-works/selected-works.component';
@@ -19,6 +19,7 @@ import { SeoService } from '../../core/services/seo.service';
     ClientsSectionComponent,
     ContactCtaComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   private readonly seo = inject(SeoService);

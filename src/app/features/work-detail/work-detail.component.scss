@@ -1,42 +1,99 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
-.work-detail {
-  &__not-found {
-    min-height: 60vh;
-    @include flex-center;
-    flex-direction: column;
-    gap: $spacing-lg;
-    text-align: center;
+// ============================================
+// Work Detail Page -- Cinematic Brutalism
+// ============================================
+
+// --- 404 State ---
+.detail-not-found {
+  min-height: 100vh;
+  background: $color-bg;
+  @include flex-center;
+  text-align: center;
+  padding: $spacing-2xl $container-padding;
+
+  &__content {
+    max-width: 480px;
   }
 
-  // Hero
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(2rem, 4vw, $font-size-3xl);
+    font-weight: $font-weight-bold;
+    color: $color-text;
+    margin-bottom: $spacing-md;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &__text {
+    @include body-text-lg;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__link {
+    display: inline-flex;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+    color: $color-accent;
+    text-decoration: none;
+    padding: 0.875rem 2rem;
+    border: 1px solid $color-accent;
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+    @include focus-ring;
+
+    &:hover {
+      background: $color-accent;
+      color: $color-white;
+    }
+  }
+}
+
+// --- Main Detail ---
+.detail {
+  background: $color-bg;
+
+  // --- Hero ---
   &__hero {
     width: 100%;
-    min-height: 50vh;
-    background: $color-background-alt;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba($color-accent, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 60%, rgba($color-accent, 0.03) 0%, transparent 40%),
+      $color-surface;
+    border-bottom: 1px solid $color-border-light;
   }
 
-  &__hero-placeholder {
-    width: 100%;
-    aspect-ratio: 21 / 9;
+  &__hero-frame {
+    @include cinematic-frame;
     @include flex-center;
-    background: linear-gradient(135deg, $color-accent, $color-background-alt);
+    background: linear-gradient(135deg, $color-surface-alt, $color-surface-raised);
+    max-width: $container-max;
+    margin-inline: auto;
   }
 
-  &__hero-icon {
-    font-size: 4rem;
-    opacity: 0.5;
+  &__hero-label {
+    @include label-text;
+    padding: 0.375rem 0.875rem;
+    background: rgba($color-bg, 0.8);
+    color: $color-accent;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-sm;
+    letter-spacing: $letter-spacing-wider;
   }
 
-  // Info
+  // --- Info Section ---
   &__info {
-    padding-block: $section-padding;
+    @include section;
   }
 
   &__container {
-    @include container;
-    max-width: 900px;
+    @include container-narrow;
   }
 
   &__header {
@@ -44,57 +101,76 @@
   }
 
   &__category {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
+    @include section-label;
     margin-bottom: $spacing-sm;
   }
 
   &__title {
     @include heading-1;
-    font-size: clamp(2rem, 5vw, $font-size-4xl);
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-xl;
   }
 
   &__meta {
-    display: flex;
-    gap: $spacing-xl;
-    flex-wrap: wrap;
-  }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
 
-  &__meta-item {
-    font-size: $font-size-sm;
-    color: $color-text-light;
-
-    strong {
-      color: $color-text;
-      font-weight: $font-weight-medium;
-      margin-right: $spacing-xs;
+    @include tablet {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-xl;
     }
   }
 
-  // Section title
-  &__section-title {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    margin-bottom: $spacing-lg;
-    padding-bottom: $spacing-sm;
-    border-bottom: 1px solid $color-border;
+  &__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-md $spacing-lg;
+    background: $color-surface;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-sm;
   }
 
-  // Description
+  &__meta-label {
+    @include label-text;
+    color: $color-text-muted;
+    font-size: 0.6875rem;
+  }
+
+  &__meta-value {
+    font-family: $font-body;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+  }
+
+  // --- Section Title ---
+  &__section-title {
+    font-family: $font-body;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+    color: $color-text;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $color-accent;
+    display: inline-block;
+  }
+
+  // --- Description ---
   &__description {
     margin-bottom: $spacing-3xl;
+    padding-top: $spacing-lg;
   }
 
   &__body {
     @include body-text-lg;
-    color: $color-text-light;
+    color: $color-text-secondary;
+    max-width: 64ch;
   }
 
-  // Tools
+  // --- Tools ---
   &__tools {
     margin-bottom: $spacing-3xl;
   }
@@ -106,75 +182,151 @@
   }
 
   &__tool-tag {
-    padding: 0.375rem 1rem;
-    font-size: $font-size-sm;
+    padding: 0.5rem 1rem;
+    font-family: $font-body;
+    font-size: $font-size-xs;
     font-weight: $font-weight-medium;
-    background: $color-background-alt;
-    border-radius: $border-radius-full;
-    color: $color-text;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: uppercase;
+    color: $color-text-secondary;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      border-color: $color-accent;
+      color: $color-accent;
+    }
   }
 
-  // Gallery
+  // --- Gallery ---
   &__gallery {
     padding-block: 0 $section-padding;
   }
 
   &__gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: $grid-gap;
 
-    @include tablet {
+    @include mobile-landscape {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include tablet-lg {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   &__gallery-item {
-    border-radius: $border-radius-lg;
+    border-radius: $border-radius-sm;
     overflow: hidden;
+    border: 1px solid $color-border-light;
   }
 
   &__gallery-placeholder {
     aspect-ratio: 4 / 3;
     @include flex-center;
-    background: linear-gradient(135deg, $color-accent, $color-background-alt);
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $color-text-muted;
+    background: linear-gradient(135deg, $color-surface-alt, $color-surface-raised);
+    position: relative;
+    transition: transform $transition-slow;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 
-  // Video
+  &__gallery-number {
+    font-family: $font-display;
+    font-size: clamp(2rem, 4vw, $font-size-3xl);
+    font-weight: $font-weight-bold;
+    color: $color-text-muted;
+    opacity: 0.25;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  // --- Video ---
   &__video {
     padding-block: 0 $section-padding;
+  }
+
+  &__video-frame {
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
   }
 
   &__video-placeholder {
     aspect-ratio: 16 / 9;
     @include flex-center;
-    flex-direction: column;
     gap: $spacing-md;
-    background: $color-text;
-    color: $color-white;
-    border-radius: $border-radius-lg;
-    font-size: $font-size-xl;
-    font-weight: $font-weight-semibold;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba($color-accent, 0.08) 0%, transparent 60%),
+      $color-surface;
+    cursor: pointer;
+    transition: background $transition-base;
+    position: relative;
+
+    &:hover {
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba($color-accent, 0.15) 0%, transparent 60%),
+        $color-surface-raised;
+
+      .detail__video-play {
+        border-color: $color-accent-light;
+        transform: scale(1.05);
+
+        &::before {
+          border-left-color: $color-accent-light;
+        }
+      }
+    }
   }
 
-  &__video-note {
+  &__video-play {
+    width: 72px;
+    height: 72px;
+    border: 2px solid $color-accent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-base;
+    position: relative;
+
+    // CSS play triangle (no emoji)
+    &::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent $color-accent;
+      margin-left: 4px;
+      transition: border-color $transition-base;
+    }
+  }
+
+  &__video-label {
+    font-family: $font-body;
     font-size: $font-size-xs;
-    color: rgba($color-white, 0.5);
-    font-weight: $font-weight-regular;
+    font-weight: $font-weight-semibold;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    color: $color-text-muted;
   }
 
-  // Credits
+  // --- Credits ---
   &__credits {
     padding-block: 0 $section-padding;
   }
 
   &__credits-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-lg;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md;
 
     @include tablet {
       grid-template-columns: repeat(3, 1fr);
@@ -186,67 +338,83 @@
   }
 
   &__credit {
-    padding: $spacing-md;
-    background: $color-background-alt;
-    border-radius: $border-radius-md;
+    padding: $spacing-md $spacing-lg;
+    background: $color-surface;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-fast;
+
+    &:hover {
+      border-color: $color-accent;
+    }
   }
 
   &__credit-role {
     display: block;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: $color-primary;
+    @include label-text;
+    color: $color-accent;
     margin-bottom: $spacing-xs;
+    font-size: 0.6875rem;
   }
 
   &__credit-name {
-    font-size: $font-size-base;
+    font-family: $font-body;
+    font-size: $font-size-sm;
     font-weight: $font-weight-medium;
     color: $color-text;
   }
 
-  // Next
+  // --- Next Project ---
   &__next {
     padding-block: $section-padding;
     border-top: 1px solid $color-border;
+    background: $color-surface;
   }
 
   &__next-label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $color-primary;
-    margin-bottom: $spacing-sm;
+    @include section-label;
+    margin-bottom: $spacing-md;
   }
 
   &__next-link {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: $spacing-md;
     text-decoration: none;
-    transition: gap $transition-base;
+    padding: $spacing-lg $spacing-xl;
+    background: $color-surface-raised;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-sm;
+    transition: border-color $transition-base, background $transition-base;
+    @include focus-ring;
 
     &:hover {
-      gap: $spacing-lg;
+      border-color: $color-accent;
+      background: $color-bg;
 
-      .work-detail__next-arrow {
-        transform: translateX(4px);
+      .detail__next-arrow {
+        transform: translateX(6px);
+        color: $color-accent-light;
       }
     }
   }
 
   &__next-title {
-    @include heading-2;
+    font-family: $font-display;
     font-size: clamp(1.5rem, 3vw, $font-size-2xl);
+    font-weight: $font-weight-semibold;
     color: $color-text;
+    line-height: $line-height-snug;
+    letter-spacing: $letter-spacing-tight;
   }
 
   &__next-arrow {
-    font-size: $font-size-2xl;
-    color: $color-primary;
-    transition: transform $transition-base;
+    font-family: $font-display;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-light;
+    color: $color-accent;
+    transition: transform $transition-base, color $transition-base;
+    flex-shrink: 0;
   }
 }

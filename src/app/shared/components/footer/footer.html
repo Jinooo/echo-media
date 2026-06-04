@@ -1,33 +1,45 @@
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer__container">
-    <div class="footer__brand">
-      <span class="footer__logo">ECHO<span class="footer__logo-accent">.</span>MEDIA</span>
-      <p class="footer__tagline">Tell The World Your Story</p>
-      <div class="footer__social">
-        @for (link of socialLinks; track link.label) {
-          <a
-            [href]="link.href"
-            class="footer__social-link"
-            [attr.aria-label]="link.label"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ link.icon }}
-            <span class="footer__social-label">{{ link.label }}</span>
-          </a>
-        }
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="footer__logo">Echo<span class="footer__logo-accent">.</span>Media</span>
+        <p class="footer__tagline">Tell The World Your Story</p>
+        <p class="footer__chinese">回声浩淼</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <p class="footer__nav-label">Navigate</p>
+        <ul class="footer__nav-list">
+          @for (link of navLinks; track link.path) {
+            <li>
+              <a [routerLink]="link.path" class="footer__nav-link">{{ link.label }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <div class="footer__social-col">
+        <p class="footer__nav-label">Connect</p>
+        <ul class="footer__social-list">
+          @for (link of socialLinks; track link.label) {
+            <li>
+              <a
+                [href]="link.href"
+                class="footer__social-link"
+                [attr.aria-label]="link.label"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ link.label }}
+                @if (link.text) {
+                  <span class="footer__social-text">{{ link.text }}</span>
+                }
+              </a>
+            </li>
+          }
+        </ul>
       </div>
     </div>
-
-    <nav class="footer__nav" aria-label="Footer navigation">
-      <ul class="footer__nav-list">
-        @for (link of navLinks; track link.path) {
-          <li>
-            <a [routerLink]="link.path" class="footer__nav-link">{{ link.label }}</a>
-          </li>
-        }
-      </ul>
-    </nav>
 
     <div class="footer__bottom">
       <p class="footer__copyright">© {{ currentYear }} Echo Media. All rights reserved.</p>
