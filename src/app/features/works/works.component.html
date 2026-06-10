@@ -2,16 +2,16 @@
   <!-- Hero -->
   <section class="works__hero">
     <div class="works__hero-content">
-      <h1 class="works__hero-title">Our Works</h1>
-      <p class="works__hero-subtitle">&#20316;&#21697;&#38598;</p>
+      <h1 class="works__hero-title">{{ 'works.title' | translate }}</h1>
+      <p class="works__hero-subtitle">{{ 'works.subtitle' | translate }}</p>
     </div>
   </section>
 
   <!-- Filter & Search -->
   <div class="works__container">
     <div class="works__toolbar">
-      <div class="works__filters" role="tablist" aria-label="Filter works by category">
-        @for (cat of categories; track cat.key) {
+      <div class="works__filters" role="tablist" [attr.aria-label]="'works.filterAria' | translate">
+        @for (cat of categories(); track cat.key) {
           <button
             class="works__filter-btn"
             [class.works__filter-btn--active]="activeFilter() === cat.key"
@@ -25,13 +25,13 @@
       </div>
 
       <div class="works__search">
-        <label for="works-search" class="works__sr-only">Search works</label>
+        <label for="works-search" class="works__sr-only">{{ 'works.searchLabel' | translate }}</label>
         <input
           id="works-search"
           type="text"
           class="works__search-input"
           [(ngModel)]="searchQuery"
-          placeholder="Search projects..."
+          [placeholder]="'works.searchPlaceholder' | translate"
           (ngModelChange)="currentPage.set(1)"
         />
         <span class="works__search-icon" aria-hidden="true"></span>
@@ -41,7 +41,7 @@
     <!-- Grid -->
     @if (filteredWorks().length === 0) {
       <div class="works__empty">
-        <p class="works__empty-text">No projects found matching your criteria.</p>
+        <p class="works__empty-text">{{ 'works.empty' | translate }}</p>
       </div>
     } @else {
       <div class="works__grid">
@@ -52,7 +52,7 @@
                 <span class="works__card-category">{{ WORK_CATEGORIES[work.category] }}</span>
               </div>
               <div class="works__card-overlay">
-                <span class="works__card-view">View Project</span>
+                <span class="works__card-view">{{ 'selectedWorks.viewProject' | translate }}</span>
               </div>
             </div>
             <div class="works__card-body">
@@ -71,14 +71,14 @@
 
       <!-- Pagination -->
       @if (totalPages() > 1) {
-        <nav class="works__pagination" aria-label="Pagination">
+        <nav class="works__pagination" [attr.aria-label]="'works.paginationAria' | translate">
           <button
             class="works__page-btn"
             [disabled]="currentPage() === 1"
             (click)="setPage(currentPage() - 1)"
-            aria-label="Previous page"
+            [attr.aria-label]="'works.prevAria' | translate"
           >
-            Prev
+            {{ 'works.prev' | translate }}
           </button>
 
           @for (page of pages(); track page) {
@@ -96,9 +96,9 @@
             class="works__page-btn"
             [disabled]="currentPage() === totalPages()"
             (click)="setPage(currentPage() + 1)"
-            aria-label="Next page"
+            [attr.aria-label]="'works.nextAria' | translate"
           >
-            Next
+            {{ 'works.next' | translate }}
           </button>
         </nav>
       }

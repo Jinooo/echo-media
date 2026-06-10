@@ -1,21 +1,16 @@
 <section class="about" aria-labelledby="about-heading">
   <div class="about__container">
     <header class="about__header">
-      <span class="about__label">About</span>
+      <span class="about__label">{{ 'about.label' | translate }}</span>
       <h2 class="about__heading" id="about-heading">
-        A Creative Studio Built for the Future of Storytelling
+        {{ 'about.heading' | translate }}
       </h2>
       <p class="about__subtitle" aria-hidden="true">关于回声浩淼</p>
     </header>
 
     <div class="about__body">
       <div class="about__text">
-        <p class="about__description">
-          Founded in <strong>2020</strong>, Echo Media has quickly established itself as a premier
-          creative production studio. We specialize in crafting visual stories that captivate, inspire,
-          and leave a lasting impression &mdash; from cinematic commercials to intimate documentaries
-          and cutting-edge virtual productions.
-        </p>
+        <p class="about__description" [innerHTML]="'about.description' | translate"></p>
       </div>
 
       <aside class="about__categories">
@@ -26,7 +21,7 @@
     </div>
 
     <div class="about__schools">
-      <span class="about__schools-label">Our team comes from</span>
+      <span class="about__schools-label">{{ 'about.schoolsLabel' | translate }}</span>
       <div class="about__schools-list">
         @for (school of schools; track school) {
           <span class="about__school">{{ school }}</span>
@@ -35,7 +30,7 @@
     </div>
 
     <div class="about__stats">
-      @for (stat of stats; track stat.label) {
+      @for (stat of stats(); track stat.value) {
         <div class="about__stat">
           <span class="about__stat-value">{{ stat.value }}</span>
           <span class="about__stat-label">{{ stat.label }}</span>

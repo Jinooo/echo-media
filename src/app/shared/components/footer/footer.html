@@ -3,14 +3,14 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__logo">Echo<span class="footer__logo-accent">.</span>Media</span>
-        <p class="footer__tagline">Tell The World Your Story</p>
+        <p class="footer__tagline">{{ 'footer.tagline' | translate }}</p>
         <p class="footer__chinese">回声浩淼</p>
       </div>
 
-      <nav class="footer__nav" aria-label="Footer navigation">
-        <p class="footer__nav-label">Navigate</p>
+      <nav class="footer__nav" [attr.aria-label]="'nav.footer' | translate">
+        <p class="footer__nav-label">{{ 'nav.navigate' | translate }}</p>
         <ul class="footer__nav-list">
-          @for (link of navLinks; track link.path) {
+          @for (link of navLinks(); track link.path) {
             <li>
               <a [routerLink]="link.path" class="footer__nav-link">{{ link.label }}</a>
             </li>
@@ -19,7 +19,7 @@
       </nav>
 
       <div class="footer__social-col">
-        <p class="footer__nav-label">Connect</p>
+        <p class="footer__nav-label">{{ 'nav.connect' | translate }}</p>
         <ul class="footer__social-list">
           @for (link of socialLinks; track link.label) {
             <li>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="footer__bottom">
-      <p class="footer__copyright">© {{ currentYear }} Echo Media. All rights reserved.</p>
+      <p class="footer__copyright">{{ copyrightText() }}</p>
     </div>
   </div>
 </footer>

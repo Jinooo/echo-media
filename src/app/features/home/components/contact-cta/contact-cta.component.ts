@@ -1,6 +1,8 @@
 import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import type { ContactFormData } from '../../../../core/models';
+import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
+import { LangService } from '../../../../core/services/lang.service';
 
 interface ContactForm {
   name: FormControl<string>;
@@ -13,11 +15,12 @@ interface ContactForm {
   selector: 'app-contact-cta',
   templateUrl: './contact-cta.component.html',
   styleUrls: ['./contact-cta.component.scss'],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactCtaComponent {
   private readonly fb = inject(FormBuilder);
+  protected readonly lang = inject(LangService);
 
   protected readonly submitted = signal(false);
 

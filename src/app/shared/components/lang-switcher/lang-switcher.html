@@ -1,0 +1,17 @@
+<div class="lang-switcher" role="radiogroup" aria-label="Language selection">
+  @for (opt of options; track opt.key; let last = $last) {
+    <button
+      class="lang-switcher__btn"
+      [class.lang-switcher__btn--active]="currentLang() === opt.key"
+      (click)="switchLang(opt.key)"
+      role="radio"
+      [attr.aria-checked]="currentLang() === opt.key"
+      [attr.aria-label]="opt.label"
+    >
+      {{ opt.label }}
+    </button>
+    @if (!last) {
+      <span class="lang-switcher__sep" aria-hidden="true">|</span>
+    }
+  }
+</div>

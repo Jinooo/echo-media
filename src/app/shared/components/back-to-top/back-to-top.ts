@@ -1,9 +1,11 @@
 import { Component, HostListener, signal, ChangeDetectionStrategy } from '@angular/core';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-back-to-top',
   templateUrl: './back-to-top.html',
   styleUrls: ['./back-to-top.scss'],
+  imports: [TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToTopComponent {

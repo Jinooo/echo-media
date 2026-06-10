@@ -2,11 +2,8 @@
   <!-- Hero -->
   <section class="contact-page__hero">
     <div class="contact-page__hero-content">
-      <h1 class="contact-page__title">Let's Create Together</h1>
-      <p class="contact-page__subtitle-chinese" lang="zh">一起创作</p>
-      <p class="contact-page__subtitle">
-        Have a project in mind? We'd love to hear about it. Reach out and let's start a conversation.
-      </p>
+      <h1 class="contact-page__title">{{ 'contact.title' | translate }}</h1>
+      <p class="contact-page__subtitle">{{ 'contact.subtitle' | translate }}</p>
     </div>
   </section>
 
@@ -14,11 +11,8 @@
     <div class="contact-page__layout">
       <!-- Info Sidebar -->
       <aside class="contact-page__info">
-        <h2 class="contact-page__info-title">Get In Touch</h2>
-        <p class="contact-page__info-text">
-          Whether you have a clear vision or just an idea, we're here to help bring it to life.
-          Reach out through any of the channels below or use the contact form.
-        </p>
+        <h2 class="contact-page__info-title">{{ 'contact.infoTitle' | translate }}</h2>
+        <p class="contact-page__info-text">{{ 'contact.infoText' | translate }}</p>
         <div class="contact-page__links">
           @for (link of socialLinks; track link.label) {
             <a
@@ -47,14 +41,14 @@
           @if (submitted()) {
             <div class="contact-page__success" role="alert">
               <div class="contact-page__success-checkmark"></div>
-              <h2>Thank You!</h2>
-              <p>Your message has been sent. We'll get back to you within 24 hours.</p>
+              <h2>{{ 'contact.successTitle' | translate }}</h2>
+              <p>{{ 'contact.successText' | translate }}</p>
             </div>
           } @else {
             <div class="contact-page__fields">
               <div class="contact-page__field">
                 <label for="contact-name" class="contact-page__label">
-                  Name <span aria-hidden="true" class="contact-page__required">*</span>
+                  {{ 'contact.nameLabel' | translate }} <span aria-hidden="true" class="contact-page__required">*</span>
                 </label>
                 <input
                   id="contact-name"
@@ -62,29 +56,29 @@
                   formControlName="name"
                   class="contact-page__input"
                   [class.contact-page__input--error]="name.touched && name.invalid"
-                  placeholder="Your full name"
+                  [placeholder]="'contact.namePlaceholder' | translate"
                   autocomplete="name"
                 />
                 @if (name.touched && name.hasError('required')) {
-                  <span class="contact-page__error" role="alert">Name is required</span>
+                  <span class="contact-page__error" role="alert">{{ 'contact.nameRequired' | translate }}</span>
                 }
               </div>
 
               <div class="contact-page__field">
-                <label for="contact-company" class="contact-page__label">Company</label>
+                <label for="contact-company" class="contact-page__label">{{ 'contact.companyLabel' | translate }}</label>
                 <input
                   id="contact-company"
                   type="text"
                   formControlName="company"
                   class="contact-page__input"
-                  placeholder="Company or organization"
+                  [placeholder]="'contact.companyPlaceholder' | translate"
                   autocomplete="organization"
                 />
               </div>
 
               <div class="contact-page__field contact-page__field--full">
                 <label for="contact-email" class="contact-page__label">
-                  Email <span aria-hidden="true" class="contact-page__required">*</span>
+                  {{ 'contact.emailLabel' | translate }} <span aria-hidden="true" class="contact-page__required">*</span>
                 </label>
                 <input
                   id="contact-email"
@@ -92,34 +86,34 @@
                   formControlName="email"
                   class="contact-page__input"
                   [class.contact-page__input--error]="email.touched && email.invalid"
-                  placeholder="you@company.com"
+                  [placeholder]="'contact.emailPlaceholder' | translate"
                   autocomplete="email"
                 />
                 @if (email.touched && email.hasError('required')) {
-                  <span class="contact-page__error" role="alert">Email is required</span>
+                  <span class="contact-page__error" role="alert">{{ 'contact.emailRequired' | translate }}</span>
                 }
                 @if (email.touched && email.hasError('email')) {
-                  <span class="contact-page__error" role="alert">Please enter a valid email address</span>
+                  <span class="contact-page__error" role="alert">{{ 'contact.emailInvalid' | translate }}</span>
                 }
               </div>
 
               <div class="contact-page__field contact-page__field--full">
                 <label for="contact-message" class="contact-page__label">
-                  Message <span aria-hidden="true" class="contact-page__required">*</span>
+                  {{ 'contact.messageLabel' | translate }} <span aria-hidden="true" class="contact-page__required">*</span>
                 </label>
                 <textarea
                   id="contact-message"
                   formControlName="message"
                   class="contact-page__input contact-page__textarea"
                   [class.contact-page__input--error]="message.touched && message.invalid"
-                  placeholder="Tell us about your project, timeline, and budget..."
+                  [placeholder]="'contact.messagePlaceholder' | translate"
                   rows="6"
                 ></textarea>
                 @if (message.touched && message.hasError('required')) {
-                  <span class="contact-page__error" role="alert">Message is required</span>
+                  <span class="contact-page__error" role="alert">{{ 'contact.messageRequired' | translate }}</span>
                 }
                 @if (message.touched && message.hasError('minlength')) {
-                  <span class="contact-page__error" role="alert">Please provide at least 10 characters</span>
+                  <span class="contact-page__error" role="alert">{{ 'contact.messageMinLength' | translate }}</span>
                 }
               </div>
             </div>
@@ -129,7 +123,7 @@
               class="contact-page__submit"
               [disabled]="form.invalid"
             >
-              Send Message
+              {{ 'contact.submit' | translate }}
             </button>
           }
         </form>

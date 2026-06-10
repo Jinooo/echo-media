@@ -11,7 +11,7 @@
   padding-block: 1.5rem;
 
   &.is-scrolled {
-    background: rgba($color-bg, 0.94);
+    background: rgba($color-bg, 0.96);
     backdrop-filter: blur(16px);
     padding-block: 0.875rem;
     border-bottom: 1px solid $color-border;
@@ -26,9 +26,16 @@
     @include flex-between;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+  }
+
   &__logo {
     text-decoration: none;
     z-index: $z-dropdown + 1;
+    flex-shrink: 0;
   }
 
   &__logo-text {

@@ -1,4 +1,4 @@
-<section class="hero" aria-label="Hero">
+<section class="hero" [attr.aria-label]="'hero.sectionAria' | translate">
   <div class="hero__bg">
     <div class="hero__bg-gradient"></div>
     <div class="hero__bg-texture" [style.transform]="'translateY(' + parallaxY() + 'px)'"></div>
@@ -17,21 +17,20 @@
     <h1 class="hero__title">
       <span class="hero__title-main">Echo Media</span>
       <span class="hero__title-chinese">回声浩淼</span>
-      <span class="hero__title-tagline">Tell The World Your Story</span>
+      <span class="hero__title-tagline">{{ 'hero.tagline' | translate }}</span>
     </h1>
 
     <p class="hero__subtitle">
-      A creative production studio where film, commercial, music video, documentary,
-      and virtual production converge — bringing stories to life with cinematic precision.
+      {{ 'hero.subtitle' | translate }}
     </p>
 
     <div class="hero__actions">
       <a routerLink="/works" class="hero__btn hero__btn--primary">
-        View Works
+        {{ 'hero.viewWorks' | translate }}
         <span class="hero__btn-arrow" aria-hidden="true">→</span>
       </a>
       <a routerLink="/contact" class="hero__btn hero__btn--outline">
-        Contact Us
+        {{ 'hero.contactUs' | translate }}
       </a>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { MOCK_WORKS, WORK_CATEGORIES } from '../../core/services/mock-works.data';
 import { SeoService } from '../../core/services/seo.service';
 import type { Work } from '../../core/models';
@@ -8,7 +9,7 @@ import type { Work } from '../../core/models';
   selector: 'app-work-detail',
   templateUrl: './work-detail.component.html',
   styleUrls: ['./work-detail.component.scss'],
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkDetailComponent implements OnInit {

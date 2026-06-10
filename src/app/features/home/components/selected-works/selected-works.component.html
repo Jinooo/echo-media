@@ -1,12 +1,12 @@
 <section class="works" aria-labelledby="works-heading">
   <div class="works__container">
     <header class="works__header">
-      <span class="works__label">Selected Works</span>
-      <h2 class="works__heading" id="works-heading">Featured Projects</h2>
+      <span class="works__label">{{ 'selectedWorks.label' | translate }}</span>
+      <h2 class="works__heading" id="works-heading">{{ 'selectedWorks.heading' | translate }}</h2>
     </header>
 
-    <div class="works__filters" role="tablist" aria-label="Filter works by category">
-      @for (cat of categories; track cat.key) {
+    <div class="works__filters" role="tablist" [attr.aria-label]="'selectedWorks.filterAria' | translate">
+      @for (cat of categories(); track cat.key) {
         <button
           class="works__filter-btn"
           [class.works__filter-btn--active]="activeFilter() === cat.key"
@@ -30,7 +30,7 @@
               <span class="works__card-category">{{ WORK_CATEGORIES[work.category] }}</span>
             </div>
             <div class="works__card-overlay">
-              <span class="works__card-view">View Project</span>
+              <span class="works__card-view">{{ 'selectedWorks.viewProject' | translate }}</span>
             </div>
           </div>
           <div class="works__card-info">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="works__cta">
-      <a routerLink="/works" class="works__cta-btn">View All Works</a>
+      <a routerLink="/works" class="works__cta-btn">{{ 'selectedWorks.viewAll' | translate }}</a>
     </div>
   </div>
 </section>

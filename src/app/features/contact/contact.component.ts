@@ -1,6 +1,8 @@
 import { Component, inject, signal, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { SeoService } from '../../core/services/seo.service';
+import { LangService } from '../../core/services/lang.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import type { ContactFormData } from '../../core/models';
 
 interface ContactForm {
@@ -14,11 +16,12 @@ interface ContactForm {
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactComponent implements OnInit {
   private readonly seo = inject(SeoService);
+  private readonly lang = inject(LangService);
   private readonly fb = inject(FormBuilder);
 
   protected readonly submitted = signal(false);
@@ -43,8 +46,8 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setMetadata({
-      title: 'Contact',
-      description: 'Get in touch with Echo Media. Let\'s create something together.',
+      title: this.lang.translate('contact.title'),
+      description: this.lang.translate('contact.subtitle'),
       type: 'website',
     });
   }

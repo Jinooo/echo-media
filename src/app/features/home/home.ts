@@ -6,6 +6,7 @@ import { ServicesSectionComponent } from './components/services/services.compone
 import { ClientsSectionComponent } from './components/clients/clients.component';
 import { ContactCtaComponent } from './components/contact-cta/contact-cta.component';
 import { SeoService } from '../../core/services/seo.service';
+import { LangService } from '../../core/services/lang.service';
 
 @Component({
   selector: 'app-home',
@@ -23,12 +24,12 @@ import { SeoService } from '../../core/services/seo.service';
 })
 export class HomeComponent implements OnInit {
   private readonly seo = inject(SeoService);
+  private readonly lang = inject(LangService);
 
   ngOnInit(): void {
     this.seo.setMetadata({
       title: 'Echo Media',
-      description:
-        'Echo Media is a creative production studio specializing in film, commercial, music video, documentary, and virtual production. Tell The World Your Story.',
+      description: this.lang.translate('hero.subtitle'),
       type: 'website',
       keywords: ['film production', 'commercial', 'music video', 'documentary', 'virtual production', 'creative studio'],
     });

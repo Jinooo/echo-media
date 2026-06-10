@@ -1,9 +1,9 @@
 @if (notFound()) {
   <main class="detail-not-found">
     <div class="detail-not-found__content">
-      <h1 class="detail-not-found__title">Project Not Found</h1>
-      <p class="detail-not-found__text">The project you're looking for doesn't exist or has been removed.</p>
-      <a routerLink="/works" class="detail-not-found__link">Back to Works</a>
+      <h1 class="detail-not-found__title">{{ 'workDetail.notFound' | translate }}</h1>
+      <p class="detail-not-found__text">{{ 'workDetail.notFoundText' | translate }}</p>
+      <a routerLink="/works" class="detail-not-found__link">{{ 'workDetail.backToWorks' | translate }}</a>
     </div>
   </main>
 } @else if (work(); as work) {
@@ -23,15 +23,15 @@
           <h1 class="detail__title">{{ work.title }}</h1>
           <div class="detail__meta">
             <div class="detail__meta-item">
-              <span class="detail__meta-label">Client</span>
+              <span class="detail__meta-label">{{ 'workDetail.client' | translate }}</span>
               <span class="detail__meta-value">{{ work.client }}</span>
             </div>
             <div class="detail__meta-item">
-              <span class="detail__meta-label">Year</span>
+              <span class="detail__meta-label">{{ 'workDetail.year' | translate }}</span>
               <span class="detail__meta-value">{{ work.year }}</span>
             </div>
             <div class="detail__meta-item">
-              <span class="detail__meta-label">Role</span>
+              <span class="detail__meta-label">{{ 'workDetail.role' | translate }}</span>
               <span class="detail__meta-value">{{ work.role }}</span>
             </div>
           </div>
@@ -39,13 +39,13 @@
 
         <!-- Description -->
         <div class="detail__description">
-          <h2 class="detail__section-title">About This Project</h2>
+          <h2 class="detail__section-title">{{ 'workDetail.aboutProject' | translate }}</h2>
           <p class="detail__body">{{ work.description }}</p>
         </div>
 
         <!-- Tools -->
         <div class="detail__tools">
-          <h2 class="detail__section-title">Tools &amp; Tech</h2>
+          <h2 class="detail__section-title">{{ 'workDetail.tools' | translate }}</h2>
           <div class="detail__tool-tags">
             @for (tool of work.tools; track tool) {
               <span class="detail__tool-tag">{{ tool }}</span>
@@ -56,9 +56,9 @@
     </section>
 
     <!-- Gallery -->
-    <section class="detail__gallery" aria-label="Project gallery">
+    <section class="detail__gallery" [attr.aria-label]="'workDetail.gallery' | translate">
       <div class="detail__container">
-        <h2 class="detail__section-title">Gallery</h2>
+        <h2 class="detail__section-title">{{ 'workDetail.gallery' | translate }}</h2>
         <div class="detail__gallery-grid">
           @for (img of work.gallery; track img; let i = $index) {
             <div class="detail__gallery-item">
@@ -73,13 +73,13 @@
 
     <!-- Video -->
     @if (work.videoUrl) {
-      <section class="detail__video" aria-label="Project video">
+      <section class="detail__video" [attr.aria-label]="'workDetail.watch' | translate">
         <div class="detail__container">
-          <h2 class="detail__section-title">Watch</h2>
+          <h2 class="detail__section-title">{{ 'workDetail.watch' | translate }}</h2>
           <div class="detail__video-frame">
             <div class="detail__video-placeholder">
               <span class="detail__video-play" aria-hidden="true"></span>
-              <span class="detail__video-label">Play Video</span>
+              <span class="detail__video-label">{{ 'workDetail.playVideo' | translate }}</span>
             </div>
           </div>
         </div>
@@ -87,9 +87,9 @@
     }
 
     <!-- Credits -->
-    <section class="detail__credits" aria-label="Project credits">
+    <section class="detail__credits" [attr.aria-label]="'workDetail.credits' | translate">
       <div class="detail__container">
-        <h2 class="detail__section-title">Credits</h2>
+        <h2 class="detail__section-title">{{ 'workDetail.credits' | translate }}</h2>
         <div class="detail__credits-grid">
           @for (credit of work.credits; track credit.role) {
             <div class="detail__credit">
@@ -105,7 +105,7 @@
     @if (nextWork()) {
       <section class="detail__next">
         <div class="detail__container">
-          <p class="detail__next-label">Next Project</p>
+          <p class="detail__next-label">{{ 'workDetail.nextProject' | translate }}</p>
           <a [routerLink]="['/works', nextWork()!.slug]" class="detail__next-link">
             <span class="detail__next-title">{{ nextWork()!.title }}</span>
             <span class="detail__next-arrow" aria-hidden="true">&rarr;</span>

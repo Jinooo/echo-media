@@ -1,12 +1,14 @@
 import { Component, signal, HostListener, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { LangSwitcherComponent } from '../lang-switcher/lang-switcher';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, LangSwitcherComponent, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.is-scrolled]': 'isScrolled()',
@@ -20,9 +22,9 @@ export class HeaderComponent {
   protected readonly isMenuOpen = signal(false);
 
   protected readonly navLinks = [
-    { path: '/works', label: 'Works' },
-    { path: '/team', label: 'Team' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/works', labelKey: 'nav.works' },
+    { path: '/team', labelKey: 'nav.team' },
+    { path: '/contact', labelKey: 'nav.contact' },
   ];
 
   @HostListener('window:scroll')

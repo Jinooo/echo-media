@@ -2,7 +2,7 @@
   class="back-to-top"
   [class.is-visible]="visible()"
   (click)="scrollToTop()"
-  aria-label="Back to top"
+  [attr.aria-label]="'common.backToTop' | translate"
 >
   <span class="back-to-top__arrow" aria-hidden="true">&uarr;</span>
 </button>

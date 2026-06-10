@@ -1,12 +1,13 @@
 import { Component, HostListener, signal, inject, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-hero-section',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroSectionComponent {

@@ -2,6 +2,8 @@ import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy, H
 import { DOCUMENT } from '@angular/common';
 import { MOCK_TEAM } from '../../core/services/mock-team.data';
 import { SeoService } from '../../core/services/seo.service';
+import { LangService } from '../../core/services/lang.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import type { TeamMember } from '../../core/models';
 
 @Component({
@@ -9,9 +11,11 @@ import type { TeamMember } from '../../core/models';
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslatePipe],
 })
 export class TeamComponent implements OnInit {
   private readonly seo = inject(SeoService);
+  private readonly lang = inject(LangService);
   private readonly document = inject(DOCUMENT);
 
   protected selectedMember = signal<TeamMember | null>(null);
@@ -30,9 +34,8 @@ export class TeamComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setMetadata({
-      title: 'Team',
-      description:
-        'Meet the talented team behind Echo Media — directors, cinematographers, editors, and visual artists.',
+      title: this.lang.translate('team.title'),
+      description: this.lang.translate('team.subtitle'),
       type: 'website',
     });
   }

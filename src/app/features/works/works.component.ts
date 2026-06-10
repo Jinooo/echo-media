@@ -1,19 +1,22 @@
 import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { FormsModule } from '@angular/forms';
 import { MOCK_WORKS, WORK_CATEGORIES } from '../../core/services/mock-works.data';
 import { SeoService } from '../../core/services/seo.service';
+import { LangService } from '../../core/services/lang.service';
 import type { WorkCategory } from '../../core/models';
 
 @Component({
   selector: 'app-works',
   templateUrl: './works.component.html',
   styleUrls: ['./works.component.scss'],
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorksComponent implements OnInit {
   private seo = inject(SeoService);
+  private lang = inject(LangService);
 
   protected WORK_CATEGORIES = WORK_CATEGORIES;
   protected allWorks = MOCK_WORKS;
@@ -23,10 +26,10 @@ export class WorksComponent implements OnInit {
   protected currentPage = signal(1);
   protected pageSize = 6;
 
-  protected categories: Array<{ key: WorkCategory | 'all'; label: string }> = [
-    { key: 'all', label: 'All' },
+  protected categories = computed(() => [
+    { key: 'all' as const, label: this.lang.translate('selectedWorks.all') },
     ...Object.entries(WORK_CATEGORIES).map(([key, label]) => ({ key: key as WorkCategory, label })),
-  ];
+  ]);
 
   protected filteredWorks = computed(() => {
     let works = this.allWorks;
@@ -69,9 +72,8 @@ export class WorksComponent implements OnInit {
 
   ngOnInit(): void {
     this.seo.setMetadata({
-      title: 'Works',
-      description:
-        'Explore our portfolio of film, commercial, music video, documentary, and virtual production projects.',
+      title: this.lang.translate('works.title'),
+      description: this.lang.translate('works.subtitle'),
       type: 'website',
     });
   }

@@ -5,6 +5,7 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { LangService } from './lang.service';
 
 export interface SeoMetadata {
   readonly title: string;
@@ -20,6 +21,7 @@ export class SeoService {
   private readonly document = inject(DOCUMENT);
   private readonly meta = inject(Meta);
   private readonly title = inject(Title);
+  private readonly lang = inject(LangService);
 
   private readonly defaultImage = '/assets/images/og-default.jpg';
   private readonly siteName = 'Echo Media';
@@ -62,7 +64,7 @@ export class SeoService {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: this.siteName,
-      description: 'Tell The World Your Story',
+      description: this.lang.translate('hero.tagline'),
       url: metadata.url ?? 'https://echomedia.com',
       sameAs: [
         'https://www.xiaohongshu.com/user/echomedia',
