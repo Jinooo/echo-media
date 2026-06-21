@@ -146,6 +146,14 @@
   border: 0;
 }
 
+// --- Reduced motion ---
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 // --- Focus visible ---
 @mixin focus-ring {
   &:focus-visible {
@@ -160,6 +168,7 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-sm;
+  min-height: 44px;
   padding: 0.875rem 2.25rem;
   font-family: $font-body;
   font-size: $font-size-sm;

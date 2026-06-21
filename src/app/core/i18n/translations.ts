@@ -70,6 +70,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contactCta.messageRequired': 'Message is required',
     'contactCta.messageMinLength': 'Message must be at least 10 characters',
     'contactCta.submit': 'Send Message',
+    'contactCta.sending': 'Sending...',
     'contactCta.success': "Thank you! We'll get back to you shortly.",
 
     // --- Works Page ---
@@ -129,6 +130,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.messageRequired': 'Message is required',
     'contact.messageMinLength': 'Please provide at least 10 characters',
     'contact.submit': 'Send Message',
+    'contact.sending': 'Sending...',
     'contact.successTitle': 'Thank You!',
     'contact.successText': 'Your message has been sent. We\'ll get back to you within 24 hours.',
 
@@ -207,6 +209,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contactCta.messageRequired': '请输入留言',
     'contactCta.messageMinLength': '留言至少需要10个字符',
     'contactCta.submit': '发送消息',
+    'contactCta.sending': '发送中...',
     'contactCta.success': '感谢！我们会尽快回复您。',
 
     // --- Works Page ---
@@ -266,6 +269,7 @@ export const TRANSLATIONS: Record<Lang, Record<string, string>> = {
     'contact.messageRequired': '请输入留言',
     'contact.messageMinLength': '请至少输入10个字符',
     'contact.submit': '发送消息',
+    'contact.sending': '发送中...',
     'contact.successTitle': '感谢！',
     'contact.successText': '您的消息已发送。我们将在24小时内回复您。',
 

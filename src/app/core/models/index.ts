@@ -70,3 +70,26 @@ export interface WorksFilter {
   readonly page: number;
   readonly pageSize: number;
 }
+
+/** Social media / contact link */
+export interface SocialLink {
+  readonly label: string;
+  readonly href: string;
+  readonly text: string;
+}
+
+/** Shared social links used across contact forms */
+export const CONTACT_SOCIAL_LINKS: readonly SocialLink[] = [
+  { label: 'Email', href: 'mailto:hello@echomedia.com', text: 'hello@echomedia.com' },
+  { label: 'WeChat', href: '#', text: 'EchoMedia' },
+  { label: 'Xiaohongshu', href: 'https://www.xiaohongshu.com/user/echomedia', text: '@EchoMedia' },
+  { label: 'Bilibili', href: 'https://space.bilibili.com/echomedia', text: '@EchoMedia' },
+];
+
+/** Default validation rules for the contact form */
+export const CONTACT_FORM_VALIDATORS = {
+  name: { required: true },
+  company: {},
+  email: { required: true, email: true },
+  message: { required: true, minlength: 10 },
+} as const;

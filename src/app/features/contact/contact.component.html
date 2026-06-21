@@ -121,9 +121,13 @@
             <button
               type="submit"
               class="contact-page__submit"
-              [disabled]="form.invalid"
+              [disabled]="form.invalid || isSubmitting()"
             >
-              {{ 'contact.submit' | translate }}
+              @if (isSubmitting()) {
+                {{ 'contact.sending' | translate }}
+              } @else {
+                {{ 'contact.submit' | translate }}
+              }
             </button>
           }
         </form>

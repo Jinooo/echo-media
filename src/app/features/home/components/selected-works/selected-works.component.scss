@@ -36,7 +36,8 @@
 
   &__filter-btn {
     @include body-text;
-    padding: $spacing-sm $spacing-lg;
+    min-height: 44px;
+    padding: $spacing-md $spacing-lg;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
     color: $color-text-secondary;

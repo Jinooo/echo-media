@@ -43,6 +43,7 @@
   &__card {
     position: relative;
     background: $color-surface;
+    cursor: pointer;
     padding: $spacing-xl;
     border: 1px solid $color-border;
     border-radius: $border-radius-md;

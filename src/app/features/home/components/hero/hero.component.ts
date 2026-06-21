@@ -18,9 +18,15 @@ export class HeroSectionComponent {
 
   protected readonly brandLogos = ['BMW', 'Nestlé', 'Bvlgari', 'miHoYo', 'Jeep'];
 
+  private rafId = 0;
+
   @HostListener('window:scroll')
   onScroll(): void {
-    this.parallaxY.set(window.scrollY * 0.2);
+    if (this.rafId) return;
+    this.rafId = requestAnimationFrame(() => {
+      this.parallaxY.set(window.scrollY * 0.2);
+      this.rafId = 0;
+    });
   }
 
   ngOnInit(): void {

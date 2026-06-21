@@ -158,6 +158,8 @@
     align-items: flex-end;
     justify-content: center;
     animation: fadeIn 0.2s ease;
+
+    @include reduced-motion;
   }
 
   // ---- Drawer Panel ----
@@ -172,6 +174,9 @@
     overflow-y: auto;
     position: relative;
     animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @include reduced-motion;
+
     color: $color-text;
 
     @include tablet {
@@ -188,8 +193,8 @@
     background: $color-surface-raised;
     border: 1px solid $color-border;
     color: $color-text-secondary;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     font-size: $font-size-lg;
     cursor: pointer;

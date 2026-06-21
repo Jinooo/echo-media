@@ -17,10 +17,15 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   background-color: $color-bg;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -155,6 +160,8 @@ select {
 // --- Page Transitions ---
 .page-enter {
   animation: pageIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @include reduced-motion;
 }
 
 @keyframes pageIn {

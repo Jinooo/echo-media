@@ -4,6 +4,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { LangService } from '../../core/services/lang.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import type { ContactFormData } from '../../core/models';
+import { CONTACT_SOCIAL_LINKS } from '../../core/models';
 
 interface ContactForm {
   name: FormControl<string>;
@@ -25,13 +26,9 @@ export class ContactComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   protected readonly submitted = signal(false);
+  protected readonly isSubmitting = signal(false);
 
-  protected readonly socialLinks = [
-    { label: 'Email', href: 'mailto:hello@echomedia.com', text: 'hello@echomedia.com' },
-    { label: 'WeChat', href: '#', text: 'EchoMedia' },
-    { label: 'Xiaohongshu', href: 'https://www.xiaohongshu.com/user/echomedia', text: '@EchoMedia' },
-    { label: 'Bilibili', href: 'https://space.bilibili.com/echomedia', text: '@EchoMedia' },
-  ];
+  protected readonly socialLinks = CONTACT_SOCIAL_LINKS;
 
   protected readonly form: FormGroup<ContactForm> = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
@@ -53,12 +50,17 @@ export class ContactComponent implements OnInit {
   }
 
   protected onSubmit(): void {
-    if (this.form.valid) {
+    if (this.form.valid && !this.isSubmitting()) {
+      this.isSubmitting.set(true);
       const formData: ContactFormData = this.form.getRawValue();
       console.log('Contact form submitted:', formData);
-      this.submitted.set(true);
-      this.form.reset();
-    } else {
+      // Simulate async submission — replace with real API call
+      setTimeout(() => {
+        this.submitted.set(true);
+        this.isSubmitting.set(false);
+        this.form.reset();
+      }, 1000);
+    } else if (!this.form.valid) {
       this.form.markAllAsTouched();
     }
   }

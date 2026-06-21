@@ -2,7 +2,7 @@
 @use 'mixins' as *;
 
 // ============================================
-// Contact CTA Section — Cinematic Brutalism
+// Contact CTA Section — Warm Editorial
 // ============================================
 
 .contact {
@@ -76,6 +76,7 @@
     padding: $spacing-sm 0;
     color: $color-text-secondary;
     text-decoration: none;
+    cursor: pointer;
     border-bottom: 1px solid $color-border-light;
     transition: color $transition-fast, border-color $transition-fast;
     @include focus-ring;

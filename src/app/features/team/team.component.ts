@@ -1,8 +1,8 @@
 import { Component, inject, signal, computed, OnInit, ChangeDetectionStrategy, HostListener } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { MOCK_TEAM } from '../../core/services/mock-team.data';
 import { SeoService } from '../../core/services/seo.service';
 import { LangService } from '../../core/services/lang.service';
+import { ScrollLockService } from '../../core/services/scroll-lock.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import type { TeamMember } from '../../core/models';
 
@@ -16,7 +16,7 @@ import type { TeamMember } from '../../core/models';
 export class TeamComponent implements OnInit {
   private readonly seo = inject(SeoService);
   private readonly lang = inject(LangService);
-  private readonly document = inject(DOCUMENT);
+  private readonly scrollLock = inject(ScrollLockService);
 
   protected selectedMember = signal<TeamMember | null>(null);
 
@@ -47,11 +47,11 @@ export class TeamComponent implements OnInit {
 
   protected openDrawer(member: TeamMember): void {
     this.selectedMember.set(member);
-    this.document.body.style.overflow = 'hidden';
+    this.scrollLock.lock('team-drawer');
   }
 
   protected closeDrawer(): void {
     this.selectedMember.set(null);
-    this.document.body.style.overflow = '';
+    this.scrollLock.unlock('team-drawer');
   }
 }

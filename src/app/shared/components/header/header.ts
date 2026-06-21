@@ -1,8 +1,8 @@
 import { Component, signal, HostListener, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
 import { LangSwitcherComponent } from '../lang-switcher/lang-switcher';
 import { TranslatePipe } from '../../pipes/translate.pipe';
+import { ScrollLockService } from '../../../core/services/scroll-lock.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,7 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
   },
 })
 export class HeaderComponent {
-  private readonly document = inject(DOCUMENT);
+  private readonly scrollLock = inject(ScrollLockService);
 
   protected readonly isScrolled = signal(false);
   protected readonly isMenuOpen = signal(false);
@@ -41,11 +41,15 @@ export class HeaderComponent {
 
   protected toggleMenu(): void {
     this.isMenuOpen.update(v => !v);
-    this.document.body.style.overflow = this.isMenuOpen() ? 'hidden' : '';
+    if (this.isMenuOpen()) {
+      this.scrollLock.lock('header-mobile-nav');
+    } else {
+      this.scrollLock.unlock('header-mobile-nav');
+    }
   }
 
   protected closeMenu(): void {
     this.isMenuOpen.set(false);
-    this.document.body.style.overflow = '';
+    this.scrollLock.unlock('header-mobile-nav');
   }
 }

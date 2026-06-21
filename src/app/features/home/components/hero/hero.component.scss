@@ -49,6 +49,8 @@
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 
+    @include reduced-motion;
+
     &.is-loaded {
       opacity: 1;
       transform: translateY(0);
@@ -175,6 +177,8 @@
     height: 48px;
     background: linear-gradient(to bottom, $color-border, transparent);
     animation: scrollPulse 2s ease-in-out infinite;
+
+    @include reduced-motion;
   }
 }
 

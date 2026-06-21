@@ -96,6 +96,7 @@
     padding: $spacing-md $spacing-lg;
     background: $color-surface;
     border: 1px solid $color-border-light;
+    cursor: pointer;
     border-radius: $border-radius-md;
     text-decoration: none;
     transition: border-color $transition-base, box-shadow $transition-base;
