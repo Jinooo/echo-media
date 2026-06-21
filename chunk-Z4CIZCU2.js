@@ -1,0 +1,1 @@
+var e=[{label:"Email",href:"mailto:hello@echomedia.com",text:"hello@echomedia.com"},{label:"WeChat",href:"#",text:"EchoMedia"},{label:"Xiaohongshu",href:"https://www.xiaohongshu.com/user/echomedia",text:"@EchoMedia"},{label:"Bilibili",href:"https://space.bilibili.com/echomedia",text:"@EchoMedia"}];export{e as a};
